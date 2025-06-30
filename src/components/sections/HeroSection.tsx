@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { HERO_SECTION } from "../../lib/constants";
 import ParticlesContainer from "../../components/shared/ParticlesContainer";
+import TypewriterText from "../../components/shared/TypewriterText"
 
 const HeroSection = () => {
   const [mounted, setMounted] = useState(false);
@@ -76,20 +77,18 @@ const HeroSection = () => {
               </span>
             </h1>
             
-            {/* Animated Role/Title */}
+            {/* Animated Role/Title with Typewriter Effect */}
             <div className="h-16 sm:h-20 flex items-center justify-center">
               <p className="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-600 dark:text-gray-300">
-                <span className="inline-block min-w-0">
-                  {mounted && (
-                    <span 
-                      className="inline-block transition-all duration-500 ease-in-out"
-                      key={currentWordIndex}
-                    >
-                      {roles[currentWordIndex]}
-                    </span>
-                  )}
-                </span>
-                <span className="animate-pulse">|</span>
+              <span className="inline-block min-w-0">
+                {mounted && (
+                <TypewriterText
+                  text={roles[currentWordIndex]}
+                  key={currentWordIndex}
+                />
+                )}
+              </span>
+              <span className="animate-pulse">|</span>
               </p>
             </div>
           </div>

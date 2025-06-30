@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadFull } from "tsparticles"; // loads tsparticles
+import React from "react";
 
 const ParticlesContainer = () => {
   const [init, setInit] = useState(false);
@@ -102,4 +103,4 @@ const ParticlesContainer = () => {
   return null;
 };
 
-export default ParticlesContainer;
+export default React.memo(ParticlesContainer);
