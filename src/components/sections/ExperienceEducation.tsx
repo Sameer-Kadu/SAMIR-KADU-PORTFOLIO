@@ -70,13 +70,14 @@ const ExperienceEducation = () => {
     <section
       id="experience"
       ref={ref}
-      className="relative py-32 bg-gradient-to-br from-slate-50 via-blue-50/40 to-indigo-50/60 dark:from-gray-900 dark:via-slate-900/60 dark:to-gray-900 overflow-hidden"
+      className="relative py-32 bg-gradient-to-br from-slate-50/80 via-blue-50/80 to-indigo-50/80 dark:from-gray-900/80 dark:via-slate-900/80 dark:to-gray-900/80 overflow-hidden"
     >
       {/* Enhanced Background Elements */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27 width=%2732%27 height=%2732%27 fill=%27none%27 stroke=%27rgb(148 163 184 / 0.08)%27%3e%3cpath d=%27m0 .5h32m-16 0v32%27/%3e%3c/svg%3e')] dark:bg-[url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27 width=%2732%27 height=%2732%27 fill=%27none%27 stroke=%27rgb(30 41 59 / 0.4)%27%3e%3cpath d=%27m0 .5h32m-16 0v32%27/%3e%3c/svg%3e')] bg-[size:24px_24px]" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-400/15 to-cyan-400/15 rounded-full mix-blend-multiply filter blur-3xl animate-bounce dark:from-blue-600/10 dark:to-cyan-600/10" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-to-r from-purple-400/15 to-pink-400/15 rounded-full mix-blend-multiply filter blur-3xl animate-pulse dark:from-purple-600/10 dark:to-pink-600/10" />
-      <div className="absolute top-1/2 left-0 w-72 h-72 bg-gradient-to-r from-indigo-400/10 to-blue-400/10 rounded-full mix-blend-multiply filter blur-2xl animate-pulse dark:from-indigo-600/5 dark:to-blue-600/5" />
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27 width=%2732%27 height=%2732%27 fill=%27none%27 stroke=%27rgb(148 163 184 / 0.08)%27%3e%3cpath d=%27m0 .5h32m-16 0v32%27/%3e%3c/svg%3e')] dark:bg-[url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27 width=%2732%27 height=%2732%27 fill=%27none%27 stroke=%27rgb(30 41 59 / 0.4)%27%3e%3cpath d=%27m0 .5h32m-16 0v32%27/%3e%3c/svg%3e')] bg-[size:24px_24px]" aria-hidden="true" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-400/15 to-cyan-400/15 rounded-full mix-blend-multiply filter blur-3xl animate-bounce dark:from-blue-600/10 dark:to-cyan-600/10" aria-hidden="true" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-to-r from-purple-400/15 to-pink-400/15 rounded-full mix-blend-multiply filter blur-3xl animate-pulse dark:from-purple-600/10 dark:to-pink-600/10" aria-hidden="true" />
+      <div className="absolute top-1/2 left-0 w-72 h-72 bg-gradient-to-r from-indigo-400/10 to-blue-400/10 rounded-full mix-blend-multiply filter blur-2xl animate-pulse dark:from-indigo-600/5 dark:to-blue-600/5" aria-hidden="true" />
+      
 
       <div className="container mx-auto px-6 lg:px-8 relative z-10">
         {/* Enhanced Section Header */}
@@ -129,86 +130,45 @@ const ExperienceEducation = () => {
           {EXPERIENCE_EDUCATION.timeline.map((item, index) => (
             <motion.div
               key={index}
-              className="relative mb-16 lg:mb-20 min-h-[300px] flex items-center"
+              className="relative mb-16 lg:mb-20 flex flex-col lg:flex-row items-center w-full"
               variants={cardVariants}
               custom={index}
             >
-              <div
-                className={`flex items-center w-full ${
-                  index % 2 === 0 ? "lg:flex-row-reverse" : "lg:flex-row"
-                } flex-col lg:gap-0 gap-8`}
-              >
-                {/* Enhanced Card */}
-                <div className="w-full lg:w-5/12 relative group">
-                  <div className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-3xl p-8 lg:p-10 shadow-2xl border border-gray-200/50 dark:border-gray-700/50 hover:shadow-[0_35px_60px_-12px_rgba(0,0,0,0.25)] transition-all duration-500 transform hover:scale-[1.02] hover:-translate-y-2">
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-600/5 to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className={`w-full relative group px-4 lg:px-0 ${index % 2 === 0 ? 'lg:pl-16' : 'lg:pr-16'}`}>
+                <div className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-3xl p-8 lg:p-10 shadow-2xl border border-gray-200/50 dark:border-gray-700/50 hover:shadow-[0_35px_60px_-12px_rgba(0,0,0,0.25)] transition-all duration-500 transform hover:scale-[1.02] hover:-translate-y-2">
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-600/5 to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                    {/* Content */}
-                    <div className="relative z-10">
-                      <div className="flex items-center justify-between mb-4">
-                        <span className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-900/50 dark:to-indigo-900/50 text-blue-700 dark:text-blue-300 text-sm font-semibold rounded-full border border-blue-200/50 dark:border-blue-700/50">
-                          {item.duration}
-                        </span>
-                        <div className="w-3 h-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-pulse" />
-                      </div>
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-900/50 dark:to-indigo-900/50 text-blue-700 dark:text-blue-300 text-sm font-semibold rounded-full border border-blue-200/50 dark:border-blue-700/50">
+                        {item.duration}
+                      </span>
+                      <div className="w-3 h-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-pulse" />
+                    </div>
 
-                      <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
-                        {item.title}
-                      </h3>
+                    <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+                      {item.title}
+                    </h3>
 
-                      <div className="flex items-center mb-6">
-                        <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mr-3" />
-                        <p className="text-lg font-semibold text-gray-700 dark:text-gray-300">
-                          {item.company || item.institution}
-                        </p>
-                      </div>
-
-                      <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-lg">
-                        {item.description}
+                    <div className="flex items-center mb-6">
+                      <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mr-3" />
+                      <p className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+                        {item.company || item.institution}
                       </p>
                     </div>
 
-                    {/* Decorative Elements */}
-                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-300" />
-                    <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-gradient-to-br from-purple-400 to-indigo-500 rounded-full opacity-15 group-hover:opacity-30 transition-opacity duration-300" />
+                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-lg">
+                      {item.description}
+                    </p>
                   </div>
+
+                  {/* Decorative Elements */}
+                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-300" />
+                  <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-gradient-to-br from-purple-400 to-indigo-500 rounded-full opacity-15 group-hover:opacity-30 transition-opacity duration-300" />
                 </div>
-
-                {/* Spacer for desktop */}
-                <div className="hidden lg:block lg:w-2/12" />
-
-                {/* Mobile timeline connector */}
-                <div className="lg:hidden w-1 h-12 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full mx-auto" />
               </div>
-
-              {/* Enhanced Timeline Icon - PROPERLY CENTERED */}
-              <motion.div
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 
-         bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-600 
-         rounded-full flex items-center justify-center text-white text-3xl 
-         shadow-2xl border-4 border-white dark:border-gray-900 
-         z-20 hover:scale-110 transition-transform duration-300"
-                variants={iconVariants}
-                whileHover={{
-                  scale: 1.1,
-                  boxShadow: "0 25px 50px -12px rgba(59, 130, 246, 0.5)",
-                }}
-              >
-                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/20 to-transparent" />
-                <span className="relative z-10 drop-shadow-lg">
-                  {item.icon || (item.company ? "💼" : "🎓")}
-                </span>
-              </motion.div>
-
-              {/* Connection Line to Card */}
-              <div
-                className={`hidden lg:block absolute top-1/2 w-16 h-0.5 bg-gradient-to-r z-10 ${
-                  index % 2 === 0
-                    ? "right-1/2 from-purple-300 to-transparent mr-10"
-                    : "left-1/2 from-transparent to-purple-300 ml-10"
-                } dark:from-purple-600 dark:to-transparent`}
-              />
             </motion.div>
           ))}
         </motion.div>

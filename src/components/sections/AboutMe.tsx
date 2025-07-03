@@ -41,7 +41,7 @@ const AboutMe = () => {
     <section 
       ref={sectionRef}
       id="about" 
-      className="py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-slate-900 relative overflow-hidden"
+      className="py-20 bg-gradient-to-br from-gray-50/80 via-white/80 to-blue-50/80 dark:from-gray-900/80 dark:via-gray-800/80 dark:to-slate-900/80 relative overflow-hidden"
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5 dark:opacity-10">
@@ -52,6 +52,7 @@ const AboutMe = () => {
           }}
         ></div>
       </div>
+      
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
@@ -72,10 +73,14 @@ const AboutMe = () => {
           {/* Left Side - Content */}
           <div className={`space-y-8 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
             {/* Tab Navigation */}
-            <div className="flex flex-wrap gap-2 mb-6">
+            <div role="tablist" className="flex flex-wrap gap-2 mb-6">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
+                  id={`tab-${tab.id}`}
+                  role="tab"
+                  aria-controls={`panel-${tab.id}`}
+                  aria-selected={activeTab === tab.id}
                   onClick={() => setActiveTab(tab.id)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                     activeTab === tab.id
@@ -93,6 +98,9 @@ const AboutMe = () => {
               {tabs.map((tab) => (
                 <div
                   key={tab.id}
+                  id={`panel-${tab.id}`}
+                  role="tabpanel"
+                  aria-labelledby={`tab-${tab.id}`}
                   className={`absolute inset-0 transition-all duration-500 ${
                     activeTab === tab.id 
                       ? 'opacity-100 translate-y-0' 

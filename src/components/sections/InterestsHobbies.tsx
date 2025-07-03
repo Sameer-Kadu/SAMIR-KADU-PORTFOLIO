@@ -31,10 +31,11 @@ const InterestsHobbies = () => {
     <section 
       id="interests" 
       ref={ref}
-      className="py-24 bg-gradient-to-br from-purple-50 via-pink-50 to-indigo-100 dark:from-purple-900/20 dark:via-slate-900 dark:to-indigo-900/20 relative overflow-hidden"
+      className="py-24 bg-gradient-to-br from-purple-50/80 via-pink-50/80 to-indigo-100/80 dark:from-purple-900/80 dark:via-slate-900/80 dark:to-indigo-900/80 relative overflow-hidden"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(168,85,247,0.1),transparent)] dark:bg-[radial-gradient(circle_at_20%_30%,rgba(168,85,247,0.05),transparent)]"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,rgba(236,72,153,0.1),transparent)] dark:bg-[radial-gradient(circle_at_80%_70%,rgba(236,72,153,0.05),transparent)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(168,85,247,0.1),transparent)] dark:bg-[radial-gradient(circle_at_20%_30%,rgba(168,85,247,0.05),transparent)]" aria-hidden="true"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,rgba(236,72,153,0.1),transparent)] dark:bg-[radial-gradient(circle_at_80%_70%,rgba(236,72,153,0.05),transparent)]" aria-hidden="true"></div>
+      
       
       <div className="container mx-auto px-6 relative z-10">
         <motion.div 

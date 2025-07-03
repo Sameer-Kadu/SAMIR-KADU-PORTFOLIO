@@ -1,75 +1,49 @@
 'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
+import Chatbot from 'react-chatbot-kit';
+import config from '../../lib/chatbot/config.mjs';
+import MessageParser from '../../lib/chatbot/MessageParser.mjs';
+import ActionProvider from '../../lib/chatbot/ActionProvider.mjs';
+import 'react-chatbot-kit/build/main.css';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MessageSquare, X } from 'lucide-react';
 
-const Chatbot = () => {
+const ChatbotComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    { sender: "bot", text: "Hello! I'm Samir's Assistant. How can I help you today?" },
-  ]);
-  const [input, setInput] = useState("");
-
-  const handleSendMessage = () => {
-    if (input.trim() === "") return;
-    setMessages([...messages, { sender: "user", text: input }]);
-    setInput("");
-    // Simulate bot response
-    setTimeout(() => {
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { sender: "bot", text: `You said: "${input}". I'm still learning, but I'll get better!` },
-      ]);
-    }, 1000);
-  };
 
   return (
-    <div className="fixed bottom-8 left-8 z-50">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg transition-all duration-300"
-      >
-        {isOpen ? "Close Chat" : "Samir's Assistant"}
-      </button>
+    <>
+      <div className="fixed bottom-8 right-8 z-50">
+        <motion.button
+          onClick={() => setIsOpen(!isOpen)}
+          className="bg-blue-600 text-white rounded-full p-4 shadow-lg hover:bg-blue-700 transition-colors duration-300"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          {isOpen ? <X size={24} /> : <MessageSquare size={24} />}
+        </motion.button>
+      </div>
 
-      {isOpen && (
-        <div className="absolute bottom-20 left-0 w-80 h-96 bg-white dark:bg-gray-800 rounded-lg shadow-xl flex flex-col">
-          <div className="p-4 border-b border-gray-200 dark:border-gray-700 text-lg font-semibold text-gray-800 dark:text-white">
-            Samir's Assistant
-          </div>
-          <div className="flex-1 p-4 overflow-y-auto space-y-4">
-            {messages.map((msg, index) => (
-              <div
-                key={index}
-                className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
-              >
-                <div
-                  className={`max-w-[70%] p-3 rounded-lg ${msg.sender === "user" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-white"}`}
-                >
-                  {msg.text}
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="p-4 border-t border-gray-200 dark:border-gray-700 flex">
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
-              className="flex-1 p-2 rounded-l-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:outline-none"
-              placeholder="Type your message..."
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, scale: 0.5 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 50, scale: 0.5 }}
+            transition={{ duration: 0.3 }}
+            className="fixed bottom-24 right-8 z-50"
+          >
+            <Chatbot
+              config={config}
+              messageParser={MessageParser}
+              actionProvider={ActionProvider}
             />
-            <button
-              onClick={handleSendMessage}
-              className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-r-lg"
-            >
-              Send
-            </button>
-          </div>
-        </div>
-      )}
-    </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
-export default Chatbot;
+export default ChatbotComponent;

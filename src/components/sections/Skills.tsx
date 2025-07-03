@@ -51,7 +51,7 @@ const SkillCategory = ({ title, skills, isInView }) => {
             variants={itemVariants}
           >
             <div className="relative w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-110">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full blur-lg opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full blur-lg opacity-20 group-hover:opacity-40 transition-opacity duration-300" aria-hidden="true"></div>
               <Image
                 src={skill.icon}
                 alt={skill.name}
@@ -78,7 +78,7 @@ const Skills = () => {
     <section 
       id="skills" 
       ref={ref}
-      className="py-24 bg-gradient-to-br from-white via-gray-50 to-blue-100 dark:from-gray-900 dark:via-slate-900 dark:to-black relative overflow-hidden"
+      className="py-24 bg-gradient-to-br from-white/80 via-gray-50/80 to-blue-100/80 dark:from-gray-900/80 dark:via-slate-900/80 dark:to-black/80 relative overflow-hidden"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 

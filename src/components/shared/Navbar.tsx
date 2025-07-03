@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { NAV_LINKS } from "../../lib/constants";
 import { ThemeToggle } from "../ui/ThemeToggle";
 import { useScrollSpy } from "../../lib/hooks/useScrollSpy";
+import { navVariants } from "../../lib/animations";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -60,7 +62,10 @@ const Navbar = () => {
 
   return (
     <>
-      <nav 
+      <motion.nav 
+        variants={navVariants}
+        initial="hidden"
+        animate="visible"
         className={`fixed top-0 z-50 w-full transition-all duration-500 ease-in-out ${
           isVisible ? 'translate-y-0' : '-translate-y-full'
         } ${
@@ -178,7 +183,7 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (

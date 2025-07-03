@@ -1,9 +1,12 @@
 "use client";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import { HERO_SECTION } from "../../lib/constants";
 import ParticlesContainer from "../../components/shared/ParticlesContainer";
-import TypewriterText from "../../components/shared/TypewriterText"
+import FuzzyText from "../ui/FuzzyText";
+import MagneticButton from '../ui/MagneticButton';
+import { AnimatePresence } from 'framer-motion';
 
 const HeroSection = () => {
   const [mounted, setMounted] = useState(false);
@@ -37,17 +40,23 @@ const HeroSection = () => {
         className="relative min-h-screen flex items-center justify-center text-center overflow-hidden"
       >
         {/* Enhanced Background with Gradient Mesh */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-slate-800 dark:to-black">
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-50/80 via-blue-50/80 to-indigo-100/80 dark:from-gray-900/80 dark:via-slate-800/80 dark:to-black/80">
           <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23e5e7eb&quot; fill-opacity=&quot;0.03&quot;%3E%3Ccircle cx=&quot;30&quot; cy=&quot;30&quot; r=&quot;1&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] dark:bg-[url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23374151&quot; fill-opacity=&quot;0.05&quot;%3E%3Ccircle cx=&quot;30&quot; cy=&quot;30&quot; r=&quot;1&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
         </div>
-        
+        <ParticlesContainer />
         <ParticlesContainer />
         
         {/* Floating Elements */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-20 left-20 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-indigo-400/5 rounded-full blur-3xl animate-pulse delay-2000"></div>
+          <div
+            className="absolute top-20 left-20 w-1/4 h-1/4 bg-blue-400/10 rounded-full blur-3xl animate-pulse"
+          ></div>
+          <div
+            className="absolute bottom-20 right-20 w-1/3 h-1/3 bg-purple-400/10 rounded-full blur-3xl animate-pulse delay-1000"
+          ></div>
+          <div
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-indigo-400/5 rounded-full blur-3xl animate-pulse delay-2000"
+          ></div>
         </div>
 
         <div className={`relative z-10 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -82,13 +91,11 @@ const HeroSection = () => {
               <p className="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-600 dark:text-gray-300">
               <span className="inline-block min-w-0">
                 {mounted && (
-                <TypewriterText
-                  text={roles[currentWordIndex]}
-                  key={currentWordIndex}
-                />
+                <FuzzyText>
+                  {roles[currentWordIndex]}
+                </FuzzyText>
                 )}
               </span>
-              <span className="animate-pulse">|</span>
               </p>
             </div>
           </div>
@@ -103,7 +110,7 @@ const HeroSection = () => {
           {/* Enhanced CTA Buttons */}
           <div className={`flex flex-col sm:flex-row justify-center items-center gap-4 transition-all duration-1000 delay-900 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             {HERO_SECTION.ctaButtons.map((button, index) => (
-              <a
+              <MagneticButton
                 key={index}
                 href={button.link}
                 target={button.type === "download" ? "_blank" : "_self"}
@@ -118,7 +125,7 @@ const HeroSection = () => {
                 {index === 0 && (
                   <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                 )}
-              </a>
+              </MagneticButton>
             ))}
           </div>
 

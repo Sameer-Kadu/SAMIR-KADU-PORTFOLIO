@@ -13,12 +13,12 @@ const Projects = () => {
   });
 
   return (
-    <section id="projects" className="relative py-24 bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-gray-900 dark:via-slate-900/50 dark:to-gray-900 overflow-hidden">
+    <section id="projects" className="relative py-24 bg-gradient-to-br from-slate-50/80 via-blue-50/80 to-indigo-50/80 dark:from-gray-900/80 dark:via-slate-900/80 dark:to-gray-900/80 overflow-hidden">
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-grid-slate-100/50 dark:bg-grid-slate-800/50 bg-[size:20px_20px]" />
-      <div className="absolute top-0 -left-4 w-72 h-72 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 rounded-full mix-blend-multiply filter blur-xl animate-blob dark:from-blue-600/10 dark:to-cyan-600/10" />
-      <div className="absolute top-0 -right-4 w-72 h-72 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000 dark:from-purple-600/10 dark:to-pink-600/10" />
-      <div className="absolute -bottom-8 left-20 w-72 h-72 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000 dark:from-yellow-600/10 dark:to-orange-600/10" />
+      <div className="absolute inset-0 bg-grid-slate-100/50 dark:bg-grid-slate-800/50 bg-[size:20px_20px]" aria-hidden="true" />
+      <div className="absolute top-0 -left-4 w-72 h-72 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 rounded-full mix-blend-multiply filter blur-xl animate-blob dark:from-blue-600/10 dark:to-cyan-600/10" aria-hidden="true" />
+      <div className="absolute top-0 -right-4 w-72 h-72 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000 dark:from-purple-600/10 dark:to-pink-600/10" aria-hidden="true" />
+      <div className="absolute -bottom-8 left-20 w-72 h-72 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000 dark:from-yellow-600/10 dark:to-orange-600/10" aria-hidden="true" />
 
       <div className="relative container mx-auto px-6 lg:px-8">
         {/* Header */}

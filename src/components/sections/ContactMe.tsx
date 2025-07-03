@@ -91,14 +91,15 @@ const ContactMe = () => {
     <section 
       ref={sectionRef}
       id="contact" 
-      className="py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 dark:from-gray-900 dark:via-slate-800 dark:to-indigo-900 relative overflow-hidden"
+      className="py-20 bg-gradient-to-br from-gray-50/80 via-blue-50/80 to-purple-50/80 dark:from-gray-900/80 dark:via-slate-800/80 dark:to-indigo-900/80 relative overflow-hidden"
     >
       {/* Background Elements */}
-      <div className="absolute inset-0 opacity-30">
+      <div className="absolute inset-0 opacity-30" aria-hidden="true">
         <div className="absolute top-20 left-20 w-64 h-64 bg-blue-400/20 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-20 right-20 w-80 h-80 bg-purple-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-400/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
       </div>
+      
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
