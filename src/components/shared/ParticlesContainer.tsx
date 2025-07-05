@@ -1,13 +1,12 @@
 'use client';
 
-'use client';
-
+import React, { memo } from "react";
 import { useEffect, useMemo, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import { MoveDirection, OutMode } from "@tsparticles/engine";
 
-const ParticlesContainer = () => {
+const ParticlesContainer = memo(() => {
   const [init, setInit] = useState(false);
 
   useEffect(() => {
@@ -104,7 +103,7 @@ const ParticlesContainer = () => {
   }
 
   return <></>;
-};
+});
 
 export default ParticlesContainer;
 
