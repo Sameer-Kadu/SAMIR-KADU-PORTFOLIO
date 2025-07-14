@@ -55,6 +55,7 @@ export const SKILLS = {
     { name: "Flask", icon: "/icons/flask.svg" },
     { name: "SQL", icon: "/icons/sql.svg" },
     { name: "MongoDB", icon: "/icons/mongodb.svg" },
+    { name: "Java", icon: "/icons/java.svg" },
   ],
   qaAutomation: [
     { name: "Selenium", icon: "/icons/selenium.svg" },
@@ -75,35 +76,28 @@ export const SKILLS = {
 export const PROJECTS = [
   {
     id: 1,
-    title: "Project Alpha",
-    description: "A web application for managing tasks and projects.",
-    techStack: ["Next.js", "Tailwind CSS", "MongoDB"],
-    image: "/images/project-alpha.jpg", // Placeholder
-    githubLink: "https://github.com/samirkadu/project-alpha",
-    demoLink: "https://project-alpha.vercel.app",
+    title: "Go_Bus",
+    description:
+      "An online bus ticket booking platform with panels for Admin, Operator, and User. Features include bus approval, route management, and customer feedback handling.",
+    techStack: ["React", "Spring Boot", "MySQL", "JWT Auth"],
+    image: "/images/go-bus.png", // Placeholder
+    githubLink: "https://github.com/Sameer-Kadu/Go_Bus.git",
+    demoLink: "https://go-bus-oarm.vercel.app/",
     category: "work",
   },
   {
     id: 2,
-    title: "Project Beta",
-    description: "An e-commerce platform with a seamless checkout experience.",
-    techStack: ["React", "Node.js", "Express.js", "PostgreSQL"],
-    image: "/images/project-beta.jpg", // Placeholder
-    githubLink: "https://github.com/samirkadu/project-beta",
-    demoLink: "https://project-beta.netlify.app",
-    category: "personal",
-  },
-  {
-    id: 3,
-    title: "Project Gamma",
-    description: "A real-time chat application with user authentication.",
-    techStack: ["Next.js", "Firebase", "TypeScript"],
-    image: "/images/project-gamma.jpg", // Placeholder
-    githubLink: "https://github.com/samirkadu/project-gamma",
-    demoLink: "https://project-gamma.vercel.app",
+    title: "Cultural Tourism Explorer",
+    description:
+      "A data-driven storytelling platform created for the Snowflake | YourStory Hero Hackathon. It bridges art, culture, and tourism by showcasing traditional experiences across India using interactive visuals.",
+    techStack: ["Snowflake", "Streamlit", "Python", "Pandas"],
+    image: "/images/tourism-hackathon.png", // Placeholder
+    githubLink: "https://github.com/Sameer-Kadu/snowflake-hero-challenge.git", // Replace if different
+    demoLink: "https://wanderwiseindia.streamlit.app/", // Replace if different
     category: "hackathon",
   },
 ];
+
 
 
 export const EXPERIENCE_EDUCATION = {
@@ -179,9 +173,9 @@ export const INTERESTS_HOBBIES = {
 export const CONTACT_ME = {
   title: "Get in Touch",
   description: "Have a question or want to work together? Feel free to reach out!",
-  email: "samir.kadu@example.com", // Replace with actual email
-  linkedin: "https://www.linkedin.com/in/samirkadu", // Replace with actual LinkedIn
-  github: "https://github.com/samirkadu", // Replace with actual GitHub
+  email: "samirkadu8@gmail.com", // Replace with actual email
+  linkedin: "https://www.linkedin.com/in/sameer-kadu/", // Replace with actual LinkedIn
+  github: "https://github.com/Sameer-Kadu", // Replace with actual GitHub
 };
 
 export const FOOTER_TEXT = "© 2024 Samir Kadu. All rights reserved.";
