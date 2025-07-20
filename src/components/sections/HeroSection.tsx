@@ -7,13 +7,14 @@ import ParticlesContainer from "../../components/shared/ParticlesContainer";
 import FuzzyText from "../ui/FuzzyText";
 import MagneticButton from '../ui/MagneticButton';
 import { AnimatePresence } from 'framer-motion';
+import { ChevronDown, Sparkles, Code, Palette, Zap } from "lucide-react"
 
 const HeroSection = () => {
   const [mounted, setMounted] = useState(false);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   
   // Assuming you have multiple roles/titles to cycle through
-  const roles = ["Full Stack Developer", "UI/UX Designer", "Problem Solver", "Tech Enthusiast"];
+  const roles = ["Full Stack Developer", "UI/UX Designer", "Quant Developer", "DevOps Engineer", "QA Automation Engineer"];
   
   useEffect(() => {
     setMounted(true);
@@ -60,26 +61,10 @@ const HeroSection = () => {
 
         <div className={`relative z-10 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           
-          {/* Avatar with Enhanced Styling */}
-          <div className={`mb-8 transition-all duration-1000 delay-300 ${mounted ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-            <div className="relative inline-block">
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
-              <Image
-                src={HERO_SECTION.avatar}
-                alt={HERO_SECTION.name}
-                width={160}
-                height={160}
-                className="relative rounded-full shadow-2xl ring-4 ring-white dark:ring-gray-800 hover:scale-105 transition-transform duration-300"
-                priority
-              />
-              {/* Status Indicator */}
-              <div className="absolute bottom-2 right-2 w-6 h-6 bg-green-500 rounded-full border-4 border-white dark:border-gray-800 animate-pulse"></div>
-            </div>
-          </div>
 
           {/* Main Heading with Stagger Animation */}
           <div className={`mb-6 transition-all duration-1000 delay-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white leading-tight mb-4">
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white leading-tight mb-16">
               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
                 Hi, I'm {HERO_SECTION.name}
               </span>
@@ -100,7 +85,7 @@ const HeroSection = () => {
           </div>
 
           {/* Tagline */}
-          <div className={`mb-8 transition-all duration-1000 delay-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className={`mb-16 transition-all duration-1000 delay-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
               {HERO_SECTION.introText}
             </p>
@@ -129,7 +114,7 @@ const HeroSection = () => {
           </div>
 
           {/* Scroll Indicator */}
-          <div className={`mt-16 transition-all duration-1000 delay-1100 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className={`mt-16 flex flex-col items-center transition-all duration-1000 delay-1100 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <button
               onClick={() => scrollToSection('about')}
               className="flex flex-col items-center space-y-2 text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 group"
@@ -139,6 +124,7 @@ const HeroSection = () => {
               <div className="w-6 h-10 border-2 border-current rounded-full flex justify-center">
                 <div className="w-1 h-3 bg-current rounded-full mt-2 animate-bounce group-hover:animate-pulse"></div>
               </div>
+              <ChevronDown className="w-5 h-5 animate-bounce" />
             </button>
           </div>
         </div>
