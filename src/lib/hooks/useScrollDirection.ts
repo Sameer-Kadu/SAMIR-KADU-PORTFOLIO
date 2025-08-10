@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 interface ScrollDirectionReturn {
   isScrolled: boolean
@@ -10,27 +10,25 @@ interface ScrollDirectionReturn {
 export const useScrollDirection = (): ScrollDirectionReturn => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
-  const [lastScrollY, setLastScrollY] = useState(0)
+  const lastScrollY = useRef(0)
 
   useEffect(() => {
     let ticking = false
 
     const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      setIsScrolled(currentScrollY > 50)
+
       if (!ticking) {
-        requestAnimationFrame(() => {
-          const currentScrollY = window.scrollY
-
-          // Background blur effect
-          setIsScrolled(currentScrollY > 50)
-
-          // Hide/show navbar on scroll
-          if (currentScrollY > lastScrollY && currentScrollY > 100) {
-            setIsVisible(false) // Scrolling down
+        window.requestAnimationFrame(() => {
+          if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+            // scrolling down
+            setIsVisible(false)
           } else {
-            setIsVisible(true) // Scrolling up
+            // scrolling up
+            setIsVisible(true)
           }
-
-          setLastScrollY(currentScrollY)
+          lastScrollY.current = currentScrollY
           ticking = false
         })
         ticking = true
@@ -39,7 +37,7 @@ export const useScrollDirection = (): ScrollDirectionReturn => {
 
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [lastScrollY])
+  }, [])
 
   return { isScrolled, isVisible }
 }
