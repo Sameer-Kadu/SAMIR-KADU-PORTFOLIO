@@ -6,9 +6,7 @@ import Navbar from "../../src/components/shared/Navbar";
 import Footer from "../../src/components/shared/Footer";
 import { ThemeProvider } from "../../src/components/shared/ThemeProvider";
 import ScrollToTopButton from "../../src/components/shared/ScrollToTopButton";
-
 import PageLoader from "../../src/components/shared/PageLoader";
-import ChatbotClientWrapper from "../../src/components/shared/ChatbotClientWrapper";
 import FloatingContactButton from "../../src/components/shared/FloatingContactButton";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -62,8 +60,6 @@ export default function RootLayout({
           {children}
           <Footer />
           <ScrollToTopButton />
-          <ChatbotClientWrapper />
-          <FloatingContactButton />
         </ThemeProvider>
       </body>
     </html>

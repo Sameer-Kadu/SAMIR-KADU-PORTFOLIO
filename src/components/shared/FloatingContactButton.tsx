@@ -15,7 +15,7 @@ const FloatingContactButton = () => {
       onClick={scrollToContact}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
-      className="fixed bottom-8 right-8 bg-blue-600 text-white p-4 rounded-full shadow-lg z-50"
+      className="bg-blue-600 text-white p-4 rounded-full shadow-lg z-50"
     >
       Contact Me
     </motion.button>

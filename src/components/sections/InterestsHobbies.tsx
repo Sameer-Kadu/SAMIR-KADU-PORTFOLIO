@@ -54,7 +54,7 @@ const InterestsHobbies = () => {
         </motion.div>
 
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto"
+          className="flex flex-wrap justify-center gap-8 max-w-7xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
@@ -62,7 +62,7 @@ const InterestsHobbies = () => {
           {INTERESTS_HOBBIES.items.map((item, index) => (
             <motion.div
               key={index}
-              className="group relative"
+              className="group relative w-full sm:w-[calc(50%-2rem)] lg:w-[calc(25%-2rem)]"
               variants={itemVariants}
             >
               <div className="relative bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-white/20 dark:border-slate-700/50 hover:scale-105 hover:bg-white/80 dark:hover:bg-slate-800/80 h-full flex flex-col items-center text-center group-hover:-translate-y-2">
