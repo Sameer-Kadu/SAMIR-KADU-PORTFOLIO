@@ -59,7 +59,7 @@ const GooeyBackground = memo(({ activeIndex, itemCount, containerRef }: GooeyBac
       })
     }
 
-    // Get the actual active nav button position
+    // Cache the active nav button position — only recalculate when activeIndex changes
     const getActiveNavPosition = () => {
       const navButtons = container.querySelectorAll("button")
       if (navButtons[activeIndex]) {
@@ -70,8 +70,6 @@ const GooeyBackground = memo(({ activeIndex, itemCount, containerRef }: GooeyBac
           y: buttonRect.top - containerRect.top + buttonRect.height / 2,
         }
       }
-
-      // Fallback to calculated position
       const itemWidth = rect.width / itemCount
       return {
         x: (activeIndex + 0.5) * itemWidth,
@@ -79,8 +77,11 @@ const GooeyBackground = memo(({ activeIndex, itemCount, containerRef }: GooeyBac
       }
     }
 
+    // Calculate once; update only on activeIndex change (handled by useEffect deps)
+    const cachedActivePos = getActiveNavPosition()
+
     let lastTime = 0
-    const targetFPS = 60
+    const targetFPS = 45
     const frameInterval = 1000 / targetFPS
 
     const animate = (currentTime) => {
@@ -92,7 +93,7 @@ const GooeyBackground = memo(({ activeIndex, itemCount, containerRef }: GooeyBac
 
       ctx.clearRect(0, 0, rect.width, rect.height)
 
-      const activePos = getActiveNavPosition()
+      const activePos = cachedActivePos
       let allParticlesAtTarget = true
 
       particlesRef.current.forEach((particle, i) => {

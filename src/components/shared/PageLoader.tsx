@@ -9,7 +9,7 @@ const PageLoader = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000); // Simulate a 2-second loading time
+    }, 800);
 
     return () => clearTimeout(timer);
   }, []);

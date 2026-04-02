@@ -14,7 +14,7 @@ const HeroSection = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   
   // Assuming you have multiple roles/titles to cycle through
-  const roles = ["Full Stack Developer", "UI/UX Designer", "Quant Developer", "DevOps Engineer", "QA Automation Engineer"];
+  const roles = ["Full Stack Developer", "UI/UX Designer", "Quant Developer", "DevOps Engineer", "Automation Engineer"];
   
   useEffect(() => {
     setMounted(true);
@@ -46,17 +46,9 @@ const HeroSection = () => {
         </div>
         <ParticlesContainer />
         
-        {/* Floating Elements */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div
-            className="absolute top-20 left-20 w-1/4 h-1/4 bg-blue-400/10 rounded-full blur-3xl animate-pulse"
-          ></div>
-          <div
-            className="absolute bottom-20 right-20 w-1/3 h-1/3 bg-purple-400/10 rounded-full blur-3xl animate-pulse delay-1000"
-          ></div>
-          <div
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-indigo-400/5 rounded-full blur-3xl animate-pulse delay-2000"
-          ></div>
+        {/* Floating Elements — single orb to reduce paint cost */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <div className="absolute top-20 left-20 w-1/4 h-1/4 bg-blue-400/10 rounded-full blur-3xl animate-pulse will-change-transform"></div>
         </div>
 
         <div className={`relative z-10 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto transition-all duration-1000 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>

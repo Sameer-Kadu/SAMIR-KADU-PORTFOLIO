@@ -6,8 +6,14 @@ import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import { MoveDirection, OutMode } from "@tsparticles/engine";
 
+const isMobileOrLowEnd = () => {
+  if (typeof window === "undefined") return false;
+  return window.innerWidth < 768 || navigator.maxTouchPoints > 0;
+};
+
 const ParticlesContainer = memo(() => {
   const [init, setInit] = useState(false);
+  const [isMobile] = useState(isMobileOrLowEnd);
 
   useEffect(() => {
     initParticlesEngine(async (engine) => {
@@ -17,78 +23,51 @@ const ParticlesContainer = memo(() => {
     });
   }, []);
 
-  const particlesLoaded = async (container) => {
-    // console.log("particlesLoaded", container);
-  };
+  const particlesLoaded = async () => {};
 
   const options = useMemo(
     () => ({
       background: {
-        color: {
-          value: "",
-        },
+        color: { value: "" },
       },
-      fpsLimit: 120,
+      fpsLimit: isMobile ? 30 : 60,
       interactivity: {
         events: {
-          onClick: {
-            enable: true,
-            mode: "push",
-          },
-          onHover: {
-            enable: true,
-            mode: "repulse",
-          },
+          onClick: { enable: !isMobile, mode: "push" },
+          onHover: { enable: !isMobile, mode: "repulse" },
         },
         modes: {
-          push: {
-            quantity: 4,
-          },
-          repulse: {
-            distance: 100, // Reduced distance
-            duration: 0.4,
-          },
+          push: { quantity: 2 },
+          repulse: { distance: 80, duration: 0.4 },
         },
       },
       particles: {
-        color: {
-          value: "#ffffff",
-        },
+        color: { value: "#ffffff" },
         links: {
           color: "#ffffff",
-          distance: 150,
-          enable: true,
-          opacity: 0.5,
+          distance: 130,
+          enable: !isMobile,
+          opacity: 0.4,
           width: 1,
         },
         move: {
           direction: MoveDirection.none,
           enable: true,
-          outModes: {
-            default: OutMode.bounce,
-          },
+          outModes: { default: OutMode.bounce },
           random: false,
-          speed: 3, // Reduced speed
+          speed: isMobile ? 1 : 2,
         },
         number: {
-          density: {
-            enable: true,
-          },
-          value: 50, // Reduced particle count
+          density: { enable: true },
+          value: isMobile ? 18 : 35,
         },
-        opacity: {
-          value: 0.5,
-        },
-        shape: {
-          type: "circle",
-        },
-        size: {
-          value: { min: 1, max: 3 }, // Reduced max size
-        },
+        opacity: { value: isMobile ? 0.3 : 0.45 },
+        shape: { type: "circle" },
+        size: { value: { min: 1, max: 2 } },
       },
-      detectRetina: true,
+      detectRetina: false,
     }),
-    []
+    [isMobile]
   );
 
   if (init) {
