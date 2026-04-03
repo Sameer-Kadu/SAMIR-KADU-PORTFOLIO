@@ -7,25 +7,29 @@ import Footer from "../../src/components/shared/Footer";
 import { ThemeProvider } from "../../src/components/shared/ThemeProvider";
 import ScrollToTopButton from "../../src/components/shared/ScrollToTopButton";
 import PageLoader from "../../src/components/shared/PageLoader";
-import FloatingContactButton from "../../src/components/shared/FloatingContactButton";
+import AvailabilityBar from "../../src/components/shared/AvailabilityBar";
+import MobileBottomNav from "../../src/components/shared/MobileBottomNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Samir Kadu - Professional Portfolio",
-  description: "Samir Kadu's professional portfolio showcasing his skills, projects, and experience in software development.",
-  keywords: "Samir Kadu, portfolio, software developer, web developer, full-stack, frontend, backend, React, Next.js, JavaScript, TypeScript, Python",
+  title: "Samir Kadu — Full Stack Engineer & QA Automation Specialist",
+  description:
+    "Samir Kadu builds reliable, production-grade web applications and automated test systems. 3+ years at Bajaj Finserv Health. AWS Certified.",
+  keywords:
+    "Samir Kadu, Full Stack Developer, QA Automation Engineer, React, Next.js, TypeScript, Spring Boot, Selenium, Playwright, AWS, Bajaj Finserv Health, portfolio",
   openGraph: {
-    title: "Samir Kadu - Professional Portfolio",
-    description: "Samir Kadu's professional portfolio showcasing his skills, projects, and experience in software development.",
-    url: "https://www.samirkadu.com", // Replace with actual URL
-    siteName: "Samir Kadu - Professional Portfolio",
+    title: "Samir Kadu — Full Stack Engineer & QA Automation Specialist",
+    description:
+      "Samir Kadu builds reliable, production-grade web applications and automated test systems. 3+ years at Bajaj Finserv Health. AWS Certified.",
+    url: "https://www.samirkadu.com",
+    siteName: "Samir Kadu",
     images: [
       {
-        url: "https://www.samirkadu.com/og-image.jpg", // Replace with actual URL
+        url: "https://www.samirkadu.com/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Samir Kadu - Professional Portfolio",
+        alt: "Samir Kadu — Full Stack Engineer & QA Automation Specialist",
       },
     ],
     locale: "en_US",
@@ -33,10 +37,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Samir Kadu - Professional Portfolio",
-    description: "Samir Kadu's professional portfolio showcasing his skills, projects, and experience in software development.",
-    creator: "@SamirKadu", // Replace with actual Twitter handle if available
-    images: ["https://www.samirkadu.com/og-image.jpg"], // Replace with actual URL
+    title: "Samir Kadu — Full Stack Engineer & QA Automation Specialist",
+    description:
+      "Samir Kadu builds reliable, production-grade web applications and automated test systems. 3+ years at Bajaj Finserv Health. AWS Certified.",
+    images: ["https://www.samirkadu.com/og-image.jpg"],
   },
 };
 
@@ -54,12 +58,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <AvailabilityBar />
           <PageLoader />
-          
           <Navbar />
-          {children}
+          <div className="lg:pb-0 pb-16">{children}</div>
           <Footer />
           <ScrollToTopButton />
+          <MobileBottomNav />
         </ThemeProvider>
       </body>
     </html>

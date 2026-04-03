@@ -46,7 +46,7 @@ const Navbar = () => {
   // Navbar CSS classes
   const navbarClasses = useMemo(
     () =>
-      `fixed top-0 z-50 w-full transition-transform duration-500 ease-in-out mt-5 rounded-full
+      `fixed top-0 z-50 w-full transition-transform duration-500 ease-in-out mt-[44px] rounded-full
       ${isVisible ? "translate-y-0" : "-translate-y-[120%]"}
       ${isScrolled ? "backdrop-blur-3xl bg-opacity-140" : ""}`,
     [isVisible, isScrolled]
