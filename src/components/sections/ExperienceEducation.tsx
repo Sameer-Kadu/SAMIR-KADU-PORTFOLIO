@@ -1,68 +1,48 @@
 "use client";
 import { useRef } from "react";
-import { motion, useInView, easeInOut } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { EXPERIENCE_EDUCATION } from "../../lib/constants";
+import { Briefcase, GraduationCap, Award, ExternalLink } from "lucide-react";
+
+const typeIconMap: Record<string, React.FC<{ className?: string }>> = {
+  experience: ({ className }) => <Briefcase className={className} />,
+  education: ({ className }) => <GraduationCap className={className} />,
+  certification: ({ className }) => <Award className={className} />,
+};
+
+const typeLabelMap: Record<string, string> = {
+  experience: "Work Experience",
+  education: "Education",
+  certification: "Certification",
+};
+
+const typeColorMap: Record<string, string> = {
+  experience: "bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 border-blue-200 dark:border-blue-700",
+  education: "bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-700",
+  certification: "bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-700",
+};
+
+const dotColorMap: Record<string, string> = {
+  experience: "bg-blue-500",
+  education: "bg-emerald-500",
+  certification: "bg-amber-500",
+};
 
 const ExperienceEducation = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
+    visible: { opacity: 1, transition: { staggerChildren: 0.18, delayChildren: 0.2 } },
   };
 
   const cardVariants = {
-    hidden: (index: number) => ({
-      opacity: 0,
-      y: 80,
-      x: index % 2 === 0 ? -50 : 50,
-      scale: 0.8,
-    }),
+    hidden: { opacity: 0, y: 40 },
     visible: {
       opacity: 1,
       y: 0,
-      x: 0,
-      scale: 1,
-      transition: {
-        duration: 0.8,
-        ease: [0.0, 0.0, 0.2, 1] as const,
-        type: "spring" as const,
-        stiffness: 100,
-        damping: 15,
-      },
-    },
-  };
-
-  const iconVariants = {
-    hidden: { scale: 0, rotate: -180 },
-    visible: {
-      scale: 1,
-      rotate: 0,
-      transition: {
-        type: "spring" as const,
-        stiffness: 300,
-        damping: 20,
-        delay: 0.5,
-      },
-    },
-  };
-
-  const lineVariants = {
-    hidden: { height: 0 },
-    visible: {
-      height: "100%",
-      transition: {
-        duration: 1.5,
-        ease: [0.42, 0, 0.58, 1] as const,
-        delay: 0.8,
-      },
+      transition: { duration: 0.6, ease: [0.0, 0.0, 0.2, 1] as const },
     },
   };
 
@@ -70,165 +50,150 @@ const ExperienceEducation = () => {
     <section
       id="experience"
       ref={ref}
-      className="relative py-32 bg-gradient-to-br from-slate-50/80 via-blue-50/80 to-indigo-50/80 dark:from-gray-900/80 dark:via-slate-900/80 dark:to-gray-900/80 overflow-hidden"
+      className="relative py-24 bg-gray-50 dark:bg-gray-950 overflow-hidden"
     >
-      {/* Enhanced Background Elements */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27 width=%2732%27 height=%2732%27 fill=%27none%27 stroke=%27rgb(148 163 184 / 0.08)%27%3e%3cpath d=%27m0 .5h32m-16 0v32%27/%3e%3c/svg%3e')] dark:bg-[url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27 width=%2732%27 height=%2732%27 fill=%27none%27 stroke=%27rgb(30 41 59 / 0.4)%27%3e%3cpath d=%27m0 .5h32m-16 0v32%27/%3e%3c/svg%3e')] bg-[size:24px_24px]" aria-hidden="true" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-400/15 to-cyan-400/15 rounded-full mix-blend-multiply filter blur-3xl animate-bounce dark:from-blue-600/10 dark:to-cyan-600/10" aria-hidden="true" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-to-r from-purple-400/15 to-pink-400/15 rounded-full mix-blend-multiply filter blur-3xl animate-pulse dark:from-purple-600/10 dark:to-pink-600/10" aria-hidden="true" />
-      <div className="absolute top-1/2 left-0 w-72 h-72 bg-gradient-to-r from-indigo-400/10 to-blue-400/10 rounded-full mix-blend-multiply filter blur-2xl animate-pulse dark:from-indigo-600/5 dark:to-blue-600/5" aria-hidden="true" />
-      
+      {/* Subtle background accent */}
+      <div
+        className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-100/50 dark:bg-indigo-900/10 rounded-full blur-3xl pointer-events-none"
+        aria-hidden="true"
+      />
 
-      <div className="container mx-auto px-6 lg:px-8 relative z-10">
-        {/* Enhanced Section Header */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-5xl">
+        {/* Section header */}
         <motion.div
-          className="text-center mb-24"
-          initial={{ opacity: 0, y: -60 }}
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: -20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1, ease: "easeOut" }}
+          transition={{ duration: 0.6 }}
         >
-          <div className="inline-flex items-center justify-center p-2 bg-blue-100/80 dark:bg-blue-900/30 rounded-full mb-6">
-            <span className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent font-semibold text-sm tracking-wide uppercase">
-              <span className="text-2xl">🚀</span>
-              <span>My Journey</span>
-            </span>
-          </div>
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-gray-900 via-blue-900 to-indigo-900 dark:from-white dark:via-blue-100 dark:to-indigo-100 bg-clip-text text-transparent leading-tight">
-              {EXPERIENCE_EDUCATION.title}
-            </span>
+          <span className="inline-block px-4 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-sm font-semibold tracking-wide uppercase mb-4">
+            My Journey
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            {EXPERIENCE_EDUCATION.title}
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
-            A comprehensive timeline showcasing my professional evolution and
-            academic milestones
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            A timeline of professional experience, education, and credentials.
           </p>
-          <div className="w-32 h-1.5 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 mx-auto rounded-full shadow-lg shadow-blue-500/25"></div>
+          <div className="w-20 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 mx-auto rounded-full mt-6" />
         </motion.div>
 
-        {/* Enhanced Timeline */}
+        {/* Timeline */}
         <motion.div
-          className="relative max-w-6xl mx-auto"
+          className="relative"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          {/* Animated Center Line */}
-          <div
-            className="absolute left-1/2 top-0 h-full w-1 
-        bg-gradient-to-b from-blue-200 via-purple-200 to-indigo-200 
-        dark:from-blue-800 dark:via-purple-800 dark:to-indigo-800 
-        rounded-full transform -translate-x-1/2 z-0"
-          >
-            <motion.div
-              className="w-full bg-gradient-to-b from-blue-500 via-purple-500 to-indigo-500 rounded-full shadow-lg"
-              variants={lineVariants}
-              initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
-            />
-          </div>
+          {/* Vertical line */}
+          <div className="absolute left-6 lg:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-200 via-indigo-200 to-purple-200 dark:from-blue-800 dark:via-indigo-800 dark:to-purple-800 -translate-x-1/2" />
 
-          {EXPERIENCE_EDUCATION.timeline.map((item, index) => (
-            <motion.div
-              key={index}
-              className="relative mb-16 lg:mb-20 flex flex-col lg:flex-row items-center w-full"
-              variants={cardVariants}
-              custom={index}
-            >
-              <div className={`w-full relative group px-4 lg:px-0 ${index % 2 === 0 ? 'lg:pl-16' : 'lg:pr-16'}`}>
-                <div className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-3xl p-8 lg:p-10 shadow-2xl border border-gray-200/50 dark:border-gray-700/50 hover:shadow-[0_35px_60px_-12px_rgba(0,0,0,0.25)] transition-all duration-500 transform hover:scale-[1.02] hover:-translate-y-2">
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-600/5 to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="space-y-10">
+            {EXPERIENCE_EDUCATION.timeline.map((item, index) => {
+              const Icon = typeIconMap[item.type] ?? typeIconMap.experience;
+              const isLeft = index % 2 === 0;
 
-                  {/* Content */}
-                  <div className="relative z-10">
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-900/50 dark:to-indigo-900/50 text-blue-700 dark:text-blue-300 text-sm font-semibold rounded-full border border-blue-200/50 dark:border-blue-700/50">
-                        {item.duration}
-                      </span>
-                      <div className="w-3 h-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-pulse" />
-                    </div>
-
-                    <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
-                      {item.title}
-                    </h3>
-
-                    <div className="flex items-center mb-6">
-                      <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mr-3" />
-                      <p className="text-lg font-semibold text-gray-700 dark:text-gray-300">
-                        {item.company || item.institution}
-                      </p>
-                    </div>
-
-                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-lg">
-                      {item.description}
-                    </p>
+              return (
+                <motion.div
+                  key={index}
+                  variants={cardVariants}
+                  className={`relative flex flex-col lg:flex-row items-start gap-0 ${
+                    isLeft ? "lg:flex-row" : "lg:flex-row-reverse"
+                  }`}
+                >
+                  {/* Timeline dot — desktop center, mobile left */}
+                  <div className="absolute left-6 lg:left-1/2 -translate-x-1/2 top-6 z-10">
+                    <div
+                      className={`w-4 h-4 rounded-full border-4 border-white dark:border-gray-950 shadow-md ${dotColorMap[item.type] ?? "bg-blue-500"}`}
+                    />
                   </div>
 
-                  {/* Decorative Elements */}
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full opacity-20 group-hover:opacity-40 transition-opacity duration-300" />
-                  <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-gradient-to-br from-purple-400 to-indigo-500 rounded-full opacity-15 group-hover:opacity-30 transition-opacity duration-300" />
-                </div>
+                  {/* Card: offset to right of timeline on mobile, alternating on desktop */}
+                  <div
+                    className={`ml-14 lg:ml-0 w-full lg:w-[calc(50%-2rem)] ${
+                      isLeft ? "lg:mr-auto lg:pr-8" : "lg:ml-auto lg:pl-8"
+                    }`}
+                  >
+                    <div className="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-md hover:shadow-xl border border-gray-100 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-600 transition-all duration-300">
+                      {/* Type badge + duration row */}
+                      <div className="flex items-center justify-between flex-wrap gap-2 mb-4">
+                        <span
+                          className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border ${
+                            typeColorMap[item.type] ?? typeColorMap.experience
+                          }`}
+                        >
+                          <Icon className="w-3.5 h-3.5" />
+                          {typeLabelMap[item.type] ?? item.type}
+                        </span>
+                        <span className="text-xs font-medium text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">
+                          {item.duration}
+                        </span>
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-200">
+                        {item.title}
+                      </h3>
+
+                      {/* Company / Institution */}
+                      <p className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 mb-3">
+                        {(item as any).company ?? (item as any).institution}
+                      </p>
+
+                      {/* Description */}
+                      <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+                        {item.description}
+                      </p>
+
+                      {/* Tech tags */}
+                      {(item as any).tags && (
+                        <div className="flex flex-wrap gap-1.5">
+                          {(item as any).tags.map((tag: string) => (
+                            <span
+                              key={tag}
+                              className="px-2.5 py-1 text-xs font-medium rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Spacer for the other side on desktop */}
+                  <div className="hidden lg:block w-[calc(50%-2rem)]" />
+                </motion.div>
+              );
+            })}
+          </div>
+        </motion.div>
+
+        {/* Summary stats */}
+        <motion.div
+          className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.9 }}
+        >
+          {[
+            { Icon: Briefcase, value: "3+", label: "Years Professional Experience", color: "text-blue-600 dark:text-blue-400", bg: "bg-blue-50 dark:bg-blue-900/20" },
+            { Icon: GraduationCap, value: "PG-DAC", label: "Post-Graduate Qualification", color: "text-emerald-600 dark:text-emerald-400", bg: "bg-emerald-50 dark:bg-emerald-900/20" },
+            { Icon: Award, value: "AWS", label: "Cloud Certified", color: "text-amber-600 dark:text-amber-400", bg: "bg-amber-50 dark:bg-amber-900/20" },
+          ].map(({ Icon, value, label, color, bg }, i) => (
+            <div
+              key={i}
+              className="text-center p-6 bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm"
+            >
+              <div className={`w-12 h-12 mx-auto mb-3 flex items-center justify-center rounded-xl ${bg}`}>
+                <Icon className={`w-6 h-6 ${color}`} />
               </div>
-            </motion.div>
+              <div className={`text-2xl font-bold ${color} mb-1`}>{value}</div>
+              <div className="text-xs text-gray-500 dark:text-gray-400 font-medium">{label}</div>
+            </div>
           ))}
         </motion.div>
       </div>
-
-      {/* Floating Achievement Stats */}
-      <motion.div
-        className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
-        initial={{ opacity: 0, y: 50 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8, delay: 1.5 }}
-      >
-        {[
-          {
-            number: `${
-              EXPERIENCE_EDUCATION.timeline.filter((item) => item.company)
-                .length
-            }+`,
-            label: "Professional Roles",
-            icon: "💼",
-          },
-          {
-            number: `${
-              EXPERIENCE_EDUCATION.timeline.filter((item) => item.institution)
-                .length
-            }+`,
-            label: "Academic Achievements",
-            icon: "🎓",
-          },
-          {
-            number: `${
-              new Date().getFullYear() -
-              Math.min(
-                ...EXPERIENCE_EDUCATION.timeline.map(
-                  (item) =>
-                    parseInt(item.duration.split("-")[0]) ||
-                    new Date().getFullYear()
-                )
-              )
-            }+`,
-            label: "Years of Growth",
-            icon: "📈",
-          },
-        ].map((stat, index) => (
-          <div
-            key={index}
-            className="text-center p-6 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200/50 dark:border-gray-700/50 hover:bg-white/80 dark:hover:bg-gray-800/80 transition-all duration-300 group"
-          >
-            <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
-              {stat.icon}
-            </div>
-            <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
-              {stat.number}
-            </div>
-            <div className="text-gray-600 dark:text-gray-400 font-medium">
-              {stat.label}
-            </div>
-          </div>
-        ))}
-      </motion.div>
     </section>
   );
 };

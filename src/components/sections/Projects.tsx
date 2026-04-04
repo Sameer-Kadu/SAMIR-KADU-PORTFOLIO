@@ -3,126 +3,126 @@
 import Image from "next/image";
 import { PROJECTS } from "../../lib/constants";
 import { useState } from "react";
+import { ExternalLink, ArrowUpRight, Lightbulb, Zap, TrendingUp } from "lucide-react";
+
+const GitHubSVG = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+  </svg>
+);
+
+const categoryLabels: Record<string, string> = {
+  work: "Professional",
+  personal: "Personal",
+  hackathon: "Hackathon",
+};
+
+const categoryColors: Record<string, string> = {
+  work: "bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300",
+  personal: "bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300",
+  hackathon: "bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300",
+};
 
 const Projects = () => {
   const [filter, setFilter] = useState("all");
+  const [expanded, setExpanded] = useState<number | null>(null);
 
-  const filteredProjects = PROJECTS.filter((project) => {
-    if (filter === "all") return true;
-    return project.category === filter;
-  });
+  const filteredProjects = PROJECTS.filter(
+    (p) => filter === "all" || p.category === filter
+  );
 
   return (
-    <section id="projects" className="relative py-24 bg-gradient-to-br from-slate-50/80 via-blue-50/80 to-indigo-50/80 dark:from-gray-900/80 dark:via-slate-900/80 dark:to-gray-900/80 overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-grid-slate-100/50 dark:bg-grid-slate-800/50 bg-[size:20px_20px]" aria-hidden="true" />
-      <div className="absolute top-0 -left-4 w-72 h-72 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 rounded-full mix-blend-multiply filter blur-xl animate-blob dark:from-blue-600/10 dark:to-cyan-600/10" aria-hidden="true" />
+    <section
+      id="projects"
+      className="relative py-24 bg-gray-50 dark:bg-gray-950 overflow-hidden"
+    >
+      {/* Background */}
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(99 102 241)'%3e%3cpath d='m0 .5h32m-16 0v32'/%3e%3c/svg%3e")`,
+        }}
+      />
+      <div
+        className="absolute top-0 right-0 w-96 h-96 bg-blue-100/40 dark:bg-blue-900/10 rounded-full blur-3xl pointer-events-none"
+        aria-hidden="true"
+      />
 
-      <div className="relative container mx-auto px-6 lg:px-8">
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center p-2 bg-blue-100/80 dark:bg-blue-900/30 rounded-full mb-6">
-            <span className="px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent font-semibold text-sm tracking-wide uppercase">
-              Portfolio
-            </span>
-          </div>
-          <h2 className="text-5xl lg:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-gray-900 via-blue-900 to-indigo-900 dark:from-white dark:via-blue-100 dark:to-indigo-100 bg-clip-text text-transparent">
-              Featured Projects
-            </span>
+        <div className="text-center mb-14">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm font-semibold tracking-wide uppercase mb-4">
+            Featured Work
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            Projects & Case Studies
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            A showcase of my technical expertise and creative problem-solving through innovative solutions
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            Real problems solved. Real code shipped. Each project tells a story — the challenge, the approach, and the result.
           </p>
+          <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto rounded-full mt-6" />
         </div>
 
-        {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-3 mb-16">
+        {/* Filter pills */}
+        <div className="flex flex-wrap justify-center gap-2 mb-12">
           {[
             { key: "all", label: "All Projects" },
-            { key: "personal", label: "Personal" },
             { key: "work", label: "Professional" },
-            { key: "hackathon", label: "Hackathons" }
+            { key: "hackathon", label: "Hackathons" },
+            { key: "personal", label: "Personal" },
           ].map(({ key, label }) => (
             <button
               key={key}
               onClick={() => setFilter(key)}
-              className={`group relative px-6 py-3 rounded-full font-medium text-sm transition-all duration-300 ${
+              className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 cursor-pointer ${
                 filter === key
-                  ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/25 scale-105"
-                  : "bg-white/80 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-700 hover:shadow-md hover:scale-105 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50"
+                  ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-500/20"
+                  : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:border-blue-400 dark:hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400"
               }`}
             >
-              <span className="relative z-10">{label}</span>
-              {filter !== key && (
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600/10 to-indigo-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              )}
+              {label}
             </button>
           ))}
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-          {filteredProjects.map((project, index) => (
-            <div
+        {/* Projects grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {filteredProjects.map((project) => (
+            <article
               key={project.id}
-              className="group relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-200/50 dark:border-gray-700/50 overflow-hidden"
-              style={{
-                animationDelay: `${index * 100}ms`
-              }}
+              className="group bg-white dark:bg-gray-800 rounded-3xl shadow-md hover:shadow-2xl border border-gray-100 dark:border-gray-700 hover:border-blue-200 dark:hover:border-blue-700 transition-all duration-500 overflow-hidden flex flex-col"
             >
-              {/* Project Image */}
-              <div className="relative overflow-hidden rounded-t-2xl">
+              {/* Project image */}
+              <div className="relative overflow-hidden">
                 <Image
                   src={project.image}
                   alt={project.title}
-                  width={500}
-                  height={300}
-                  className="w-full h-52 object-cover transition-transform duration-700 group-hover:scale-110"
+                  width={600}
+                  height={340}
+                  className="w-full h-52 object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-              {/* Project Content */}
-              <div className="p-6">
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
-                    {project.title}
-                  </h3>
-                  <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-xs font-medium rounded-full">
-                    {project.category}
-                  </span>
-                </div>
+                {/* Category badge */}
+                <span
+                  className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold ${
+                    categoryColors[project.category] ?? categoryColors.work
+                  }`}
+                >
+                  {categoryLabels[project.category] ?? project.category}
+                </span>
 
-                <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed line-clamp-3">
-                  {project.description}
-                </p>
-
-                {/* Tech Stack */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.techStack.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="px-3 py-1 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 text-gray-700 dark:text-gray-300 text-xs font-medium rounded-full border border-gray-200/50 dark:border-gray-600/50 hover:scale-105 transition-transform duration-200"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Action Links */}
-                <div className="flex items-center space-x-4">
+                {/* Quick action links on hover */}
+                <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
                   {project.githubLink && (
                     <a
                       href={project.githubLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group/link flex items-center space-x-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 hover:shadow-md"
+                      aria-label="View source code"
+                      className="w-9 h-9 flex items-center justify-center rounded-full bg-white/90 dark:bg-gray-900/90 text-gray-700 dark:text-gray-200 hover:bg-white hover:text-gray-900 shadow-md transition-all duration-200 cursor-pointer"
                     >
-                      <svg className="w-4 h-4 transition-transform duration-300 group-hover/link:scale-110" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                      </svg>
-                      <span className="text-sm font-medium">Code</span>
+                      <GitHubSVG className="w-4 h-4" />
                     </a>
                   )}
                   {project.demoLink && (
@@ -130,64 +130,127 @@ const Projects = () => {
                       href={project.demoLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group/link flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25"
+                      aria-label="View live demo"
+                      className="w-9 h-9 flex items-center justify-center rounded-full bg-white/90 dark:bg-gray-900/90 text-gray-700 dark:text-gray-200 hover:bg-blue-600 hover:text-white shadow-md transition-all duration-200 cursor-pointer"
                     >
-                      <svg className="w-4 h-4 transition-transform duration-300 group-hover/link:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                      <span className="text-sm font-medium">Live Demo</span>
+                      <ExternalLink className="w-4 h-4" />
                     </a>
                   )}
                 </div>
               </div>
 
-              {/* Hover Effect Overlay */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-600/5 to-indigo-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-            </div>
+              {/* Content */}
+              <div className="flex flex-col flex-1 p-6">
+                <div className="mb-4">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-0.5 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200">
+                    {project.title}
+                  </h3>
+                  <p className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wide">
+                    {project.subtitle}
+                  </p>
+                </div>
+
+                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-5 flex-1">
+                  {project.description}
+                </p>
+
+                {/* Challenge → Outcome (expandable) */}
+                {expanded === project.id && (
+                  <div className="space-y-3 mb-5 animate-in fade-in duration-300">
+                    <div className="flex items-start gap-3 p-3.5 rounded-xl bg-amber-50 dark:bg-amber-900/15 border border-amber-200 dark:border-amber-800">
+                      <Lightbulb className="w-4 h-4 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-xs font-bold text-amber-700 dark:text-amber-400 mb-1">The Challenge</p>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">{project.challenge}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3 p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-900/15 border border-emerald-200 dark:border-emerald-800">
+                      <TrendingUp className="w-4 h-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-xs font-bold text-emerald-700 dark:text-emerald-400 mb-1">The Outcome</p>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">{project.outcome}</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Tech stack */}
+                <div className="flex flex-wrap gap-1.5 mb-5">
+                  {project.techStack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2.5 py-1 text-xs font-medium rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-gray-200/50 dark:border-gray-600/50"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Action row */}
+                <div className="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-700 mt-auto">
+                  <button
+                    onClick={() => setExpanded(expanded === project.id ? null : project.id)}
+                    className="flex items-center gap-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200 cursor-pointer"
+                  >
+                    <Zap className="w-3.5 h-3.5" />
+                    {expanded === project.id ? "Hide Case Study" : "View Case Study"}
+                  </button>
+
+                  <div className="flex items-center gap-2">
+                    {project.githubLink && (
+                      <a
+                        href={project.githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200 cursor-pointer"
+                      >
+                        <GitHubSVG className="w-3.5 h-3.5" />
+                        Code
+                      </a>
+                    )}
+                    {project.demoLink && (
+                      <a
+                        href={project.demoLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 cursor-pointer"
+                      >
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                        Live Demo
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </article>
           ))}
         </div>
 
-        {/* Empty State */}
+        {/* Empty state */}
         {filteredProjects.length === 0 && (
-          <div className="text-center py-16">
-            <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 rounded-full flex items-center justify-center">
-              <svg className="w-10 h-10 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-              </svg>
+          <div className="text-center py-20">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+              <ExternalLink className="w-7 h-7 text-gray-400" />
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">No projects found</h3>
-            <p className="text-gray-600 dark:text-gray-400">Try selecting a different category to view projects.</p>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">No projects in this category</h3>
+            <p className="text-sm text-gray-500 dark:text-gray-400">Try a different filter above.</p>
           </div>
         )}
-      </div>
 
-      <style jsx>{`
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        .animate-blob {
-          animation: blob 7s infinite;
-          will-change: transform;
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .animate-blob { animation: none; }
-        }
-        .line-clamp-3 {
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-        .bg-grid-slate-100\/50 {
-          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(148 163 184 / 0.05)'%3e%3cpath d='m0 .5h32m-16 0v32'/%3e%3c/svg%3e");
-        }
-        .dark .bg-grid-slate-800\/50 {
-          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(30 41 59 / 0.5)'%3e%3cpath d='m0 .5h32m-16 0v32'/%3e%3c/svg%3e");
-        }
-      `}</style>
+        {/* GitHub CTA */}
+        <div className="text-center mt-14">
+          <a
+            href="https://github.com/Sameer-Kadu"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-semibold text-sm border border-gray-200 dark:border-gray-700 hover:border-blue-400 dark:hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer"
+          >
+            <GitHubSVG className="w-4 h-4" />
+            View all projects on GitHub
+            <ArrowUpRight className="w-4 h-4" />
+          </a>
+        </div>
+      </div>
     </section>
   );
 };
