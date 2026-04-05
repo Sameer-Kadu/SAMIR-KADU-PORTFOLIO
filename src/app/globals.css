@@ -2,10 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Font variables ── */
+@layer base {
+  :root {
+    --font-heading: "Space Grotesk", sans-serif;
+    --font-body: "DM Sans", sans-serif;
+  }
+
+  html {
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+  }
+}
+
 /* ── Performance: promote animated elements to their own composite layer ── */
 .animate-pulse,
 .animate-bounce,
-.animate-spin {
+.animate-spin,
+.animate-float {
   will-change: transform, opacity;
 }
 
@@ -31,12 +49,103 @@
 /* ── Performance: prevent layout thrash from backdrop-blur on low-end devices ── */
 @supports not (backdrop-filter: blur(1px)) {
   .backdrop-blur-sm,
+  .backdrop-blur-md,
+  .backdrop-blur-xl,
   .backdrop-blur-3xl {
     backdrop-filter: none;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.95);
   }
   .dark .backdrop-blur-sm,
+  .dark .backdrop-blur-md,
+  .dark .backdrop-blur-xl,
   .dark .backdrop-blur-3xl {
-    background-color: rgba(17, 24, 39, 0.95);
+    background-color: rgba(10, 14, 26, 0.97);
   }
+}
+
+/* ── Gradient text utility ── */
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, #2563eb 0%, #6366f1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-warm {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .border-gradient {
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    background-color: transparent;
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .glass-card-light {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .section-padding {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding-top: 8rem;
+      padding-bottom: 8rem;
+    }
+  }
+}
+
+/* ── Selection color ── */
+::selection {
+  background: rgba(37, 99, 235, 0.25);
+  color: inherit;
+}
+
+/* ── Scrollbar styling ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(37, 99, 235, 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(37, 99, 235, 0.5);
+}
+
+/* ── Focus ring ── */
+:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Section divider ── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(37, 99, 235, 0.2),
+    rgba(99, 102, 241, 0.2),
+    transparent
+  );
 }

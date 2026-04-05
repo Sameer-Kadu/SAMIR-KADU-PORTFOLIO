@@ -1,112 +1,200 @@
-'use client';
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import Image from 'next/image';
-import { SKILLS } from '../../lib/constants';
+"use client";
+import { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import Image from "next/image";
+import { SKILLS } from "../../lib/constants";
 
-const SkillCategory = ({ title, skills, isInView }) => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
+type SkillCategory = "frontend" | "backend" | "qa" | "devops";
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { duration: 0.5, ease: [0.0, 0.0, 0.2, 1] as const },
-    },
-  };
+const CATEGORIES: { key: SkillCategory; label: string; count: number }[] = [
+  { key: "frontend", label: "Frontend", count: SKILLS.frontend.length },
+  { key: "backend", label: "Backend", count: SKILLS.backend.length },
+  { key: "qa", label: "QA Automation", count: SKILLS.qaAutomation.length },
+  { key: "devops", label: "DevOps", count: SKILLS.devops.length },
+];
 
-  return (
-    <motion.div
-      className="w-full md:w-1/2 lg:w-1/4 p-4"
-      initial={{ opacity: 0, y: 50 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, ease: 'easeOut' }}
-    >
-      <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
-        <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
-          {title}
-        </span>
-      </h3>
-      <motion.div
-        className="grid grid-cols-2 sm:grid-cols-3 gap-6"
-        variants={containerVariants}
-        initial="hidden"
-        animate={isInView ? 'visible' : 'hidden'}
-      >
-        {skills.map((skill) => (
-          <motion.div
-            key={skill.name}
-            className="group flex flex-col items-center justify-center p-6 bg-white/60 dark:bg-gray-800/60 backdrop-blur-xl rounded-2xl shadow-lg hover:shadow-2xl border border-gray-200 dark:border-gray-700 transition-all duration-300 transform hover:-translate-y-2 hover:scale-105"
-            variants={itemVariants}
-          >
-            <div className="relative w-16 h-16 mb-4 transition-transform duration-300 group-hover:scale-110">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full blur-lg opacity-20 group-hover:opacity-40 transition-opacity duration-300" aria-hidden="true"></div>
-              <Image
-                src={skill.icon}
-                alt={skill.name}
-                width={64}
-                height={64}
-                className="relative object-contain p-2 bg-white/80 dark:bg-gray-900/80 rounded-full shadow-md"
-              />
-            </div>
-            <p className="text-gray-800 dark:text-gray-200 text-center text-sm font-semibold">
-              {skill.name}
-            </p>
-          </motion.div>
-        ))}
-      </motion.div>
-    </motion.div>
-  );
+const categoryMap: Record<SkillCategory, typeof SKILLS.frontend> = {
+  frontend: SKILLS.frontend,
+  backend: SKILLS.backend,
+  qa: SKILLS.qaAutomation,
+  devops: SKILLS.devops,
 };
+
+const SkillPill = ({
+  skill,
+  index,
+  isInView,
+}: {
+  skill: { name: string; icon: string };
+  index: number;
+  isInView: boolean;
+}) => (
+  <motion.div
+    initial={{ opacity: 0, y: 12, scale: 0.96 }}
+    animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+    transition={{ duration: 0.4, delay: 0.05 * index, ease: "easeOut" }}
+    className="group flex items-center gap-3 px-4 py-3 rounded-2xl bg-white dark:bg-white/[0.04] border border-gray-100 dark:border-white/[0.07] hover:border-brand-200 dark:hover:border-brand-600/30 hover:shadow-md dark:hover:shadow-none hover:bg-gray-50 dark:hover:bg-white/[0.07] transition-all duration-200 cursor-default"
+  >
+    <div className="relative w-8 h-8 flex-shrink-0">
+      <Image
+        src={skill.icon}
+        alt={skill.name}
+        width={32}
+        height={32}
+        className="object-contain w-full h-full transition-transform duration-200 group-hover:scale-110"
+      />
+    </div>
+    <span className="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-200 whitespace-nowrap">
+      {skill.name}
+    </span>
+  </motion.div>
+);
 
 const Skills = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
+  const [activeCategory, setActiveCategory] = useState<SkillCategory>("frontend");
+
+  const activeSkills = categoryMap[activeCategory];
 
   return (
-    <section 
-      id="skills" 
+    <section
+      id="skills"
       ref={ref}
-      className="py-24 bg-gradient-to-br from-white/80 via-gray-50/80 to-blue-100/80 dark:from-gray-900/80 dark:via-slate-900/80 dark:to-black/80 relative overflow-hidden"
+      className="section-padding bg-white dark:bg-[#0A0E1A] relative overflow-hidden"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: -50 }}
+      {/* Background accent */}
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-500/5 rounded-full blur-[120px] pointer-events-none" aria-hidden="true" />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+
+        {/* Section header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
+          transition={{ duration: 0.6 }}
+          className="mb-14"
         >
-          <div className="inline-flex items-center space-x-2 bg-blue-100 dark:bg-blue-900/30 px-4 py-2 rounded-full text-blue-600 dark:text-blue-400 text-sm font-medium mb-4">
-            <span>🛠️</span>
-            <span>My Toolbox</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-50 dark:bg-brand-600/10 border border-brand-200 dark:border-brand-600/20 text-brand-700 dark:text-brand-400 text-xs font-semibold uppercase tracking-wider mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-500" />
+            Skills & Stack
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              {SKILLS.title}
-            </span>
-          </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            A collection of technologies and tools I use to bring ideas to life.
-          </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full mt-6"></div>
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+            <div>
+              <h2 className="font-heading text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
+                {SKILLS.title}
+              </h2>
+              <p className="text-gray-500 dark:text-gray-400 mt-2 max-w-lg text-base">
+                {SKILLS.subtitle}
+              </p>
+            </div>
+          </div>
         </motion.div>
-        <div className="flex flex-wrap justify-center -mx-4">
-          <SkillCategory title="Frontend" skills={SKILLS.frontend} isInView={isInView} />
-          <SkillCategory title="Backend" skills={SKILLS.backend} isInView={isInView} />
-          <SkillCategory title="QA Automation" skills={SKILLS.qaAutomation} isInView={isInView} />
-          <SkillCategory title="DevOps" skills={SKILLS.devops} isInView={isInView} />
-        </div>
+
+        {/* Core stack — always visible, prominent */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="mb-12"
+        >
+          <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-500 mb-4">
+            Core Stack
+          </p>
+          <div className="flex flex-wrap gap-3">
+            {SKILLS.core.map((skill, i) => (
+              <motion.div
+                key={skill.name}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.4, delay: 0.05 * i + 0.2 }}
+                className="group flex items-center gap-3 px-5 py-3 rounded-2xl bg-brand-50 dark:bg-brand-600/[0.08] border border-brand-100 dark:border-brand-600/20 hover:bg-brand-100 dark:hover:bg-brand-600/15 hover:border-brand-200 dark:hover:border-brand-600/30 transition-all duration-200 cursor-default"
+              >
+                <div className="relative w-9 h-9 flex-shrink-0">
+                  <Image
+                    src={skill.icon}
+                    alt={skill.name}
+                    width={36}
+                    height={36}
+                    className="object-contain w-full h-full transition-transform duration-200 group-hover:scale-110"
+                  />
+                </div>
+                <span className="text-sm font-semibold text-brand-700 dark:text-brand-300">
+                  {skill.name}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Divider */}
+        <div className="section-divider mb-10" />
+
+        {/* Category tabs + skills grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-500 mb-4">
+            All Skills
+          </p>
+
+          {/* Category tabs */}
+          <div className="flex flex-wrap gap-2 mb-7">
+            {CATEGORIES.map(({ key, label, count }) => (
+              <button
+                key={key}
+                onClick={() => setActiveCategory(key)}
+                className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer ${
+                  activeCategory === key
+                    ? "bg-brand-600 text-white shadow-glow-sm"
+                    : "bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-white/10 hover:bg-gray-200 dark:hover:bg-white/10 hover:text-gray-900 dark:hover:text-white"
+                }`}
+              >
+                {label}
+                <span
+                  className={`text-xs px-1.5 py-0.5 rounded-full ${
+                    activeCategory === key
+                      ? "bg-white/20 text-white"
+                      : "bg-gray-200 dark:bg-white/10 text-gray-500 dark:text-gray-400"
+                  }`}
+                >
+                  {count}
+                </span>
+              </button>
+            ))}
+          </div>
+
+          {/* Skills grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+            {activeSkills.map((skill, i) => (
+              <SkillPill key={skill.name} skill={skill} index={i} isInView={isInView} />
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Bottom credibility note */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mt-10 pt-8 border-t border-gray-100 dark:border-white/[0.06] flex flex-wrap items-center justify-center gap-6 text-xs text-gray-500 dark:text-gray-500"
+        >
+          <span className="flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+            All skills used in production projects
+          </span>
+          <span className="flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-500" />
+            3+ years of professional experience
+          </span>
+          <span className="flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+            AWS Certified Solutions Architect
+          </span>
+        </motion.div>
+
       </div>
     </section>
   );
