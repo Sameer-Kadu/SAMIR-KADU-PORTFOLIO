@@ -61,15 +61,12 @@ const Navbar = () => {
               {/* Logo */}
               <Link
                 href="/"
-                className="group flex items-center space-x-2 text-xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300"
+                className="group flex items-center gap-2.5 font-heading font-bold text-gray-900 dark:text-white hover:text-brand-600 dark:hover:text-brand-400 transition-colors duration-200"
               >
-                <div className="relative">
-                  <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-sm group-hover:scale-110 transition-transform duration-300">
-                    S
-                  </div>
-                  <div className="absolute -inset-1 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg blur opacity-30 group-hover:opacity-60 transition-opacity duration-300"></div>
+                <div className="w-8 h-8 bg-brand-600 rounded-xl flex items-center justify-center text-white font-bold text-sm group-hover:scale-110 transition-transform duration-200 shadow-glow-sm">
+                  S
                 </div>
-                <span className="hidden sm:block">Samir Kadu</span>
+                <span className="hidden sm:block text-base">Samir Kadu</span>
               </Link>
 
               {/* Desktop Navigation */}

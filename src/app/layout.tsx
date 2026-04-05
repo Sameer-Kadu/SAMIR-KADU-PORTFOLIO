@@ -1,31 +1,45 @@
 
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Space_Grotesk, DM_Sans } from "next/font/google";
 import './globals.css';
 import Navbar from "../../src/components/shared/Navbar";
 import Footer from "../../src/components/shared/Footer";
 import { ThemeProvider } from "../../src/components/shared/ThemeProvider";
 import ScrollToTopButton from "../../src/components/shared/ScrollToTopButton";
 import PageLoader from "../../src/components/shared/PageLoader";
-import FloatingContactButton from "../../src/components/shared/FloatingContactButton";
 
-const inter = Inter({ subsets: ["latin"] });
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+  weight: ["400", "500", "700"],
+});
 
 export const metadata: Metadata = {
-  title: "Samir Kadu - Professional Portfolio",
-  description: "Samir Kadu's professional portfolio showcasing his skills, projects, and experience in software development.",
-  keywords: "Samir Kadu, portfolio, software developer, web developer, full-stack, frontend, backend, React, Next.js, JavaScript, TypeScript, Python",
+  title: "Samir Kadu — Full Stack Engineer",
+  description:
+    "Samir Kadu is a Full Stack Engineer & QA Automation specialist with 3+ years building scalable health-tech platforms. React, Next.js, TypeScript, Node.js, AWS.",
+  keywords:
+    "Samir Kadu, Full Stack Engineer, Software Engineer, React, Next.js, TypeScript, Node.js, AWS, QA Automation, Bajaj Finserv Health, portfolio",
   openGraph: {
-    title: "Samir Kadu - Professional Portfolio",
-    description: "Samir Kadu's professional portfolio showcasing his skills, projects, and experience in software development.",
-    url: "https://www.samirkadu.com", // Replace with actual URL
-    siteName: "Samir Kadu - Professional Portfolio",
+    title: "Samir Kadu — Full Stack Engineer",
+    description:
+      "3+ years building scalable health-tech platforms. React · Next.js · TypeScript · AWS.",
+    url: "https://www.samirkadu.com",
+    siteName: "Samir Kadu",
     images: [
       {
-        url: "https://www.samirkadu.com/og-image.jpg", // Replace with actual URL
+        url: "https://www.samirkadu.com/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Samir Kadu - Professional Portfolio",
+        alt: "Samir Kadu — Full Stack Engineer",
       },
     ],
     locale: "en_US",
@@ -33,10 +47,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Samir Kadu - Professional Portfolio",
-    description: "Samir Kadu's professional portfolio showcasing his skills, projects, and experience in software development.",
-    creator: "@SamirKadu", // Replace with actual Twitter handle if available
-    images: ["https://www.samirkadu.com/og-image.jpg"], // Replace with actual URL
+    title: "Samir Kadu — Full Stack Engineer",
+    description:
+      "3+ years building scalable health-tech platforms. React · Next.js · TypeScript · AWS.",
+    images: ["https://www.samirkadu.com/og-image.jpg"],
   },
 };
 
@@ -46,16 +60,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${spaceGrotesk.variable} ${dmSans.variable}`}
+    >
+      <body className="font-body antialiased">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
           <PageLoader />
-          
           <Navbar />
           {children}
           <Footer />

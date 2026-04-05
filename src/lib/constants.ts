@@ -1,10 +1,12 @@
 export const SITE_METADATA = {
-  title: "Samir Kadu - Professional Portfolio",
-  description: "Samir Kadu's professional portfolio showcasing his skills, projects, and experience in software development.",
+  title: "Samir Kadu — Full Stack Engineer",
+  description:
+    "Full Stack Engineer & QA Automation specialist with 3+ years building scalable health-tech platforms at Bajaj Finserv Health.",
   author: "Samir Kadu",
-  keywords: "Samir Kadu, portfolio, developer, software engineer, web developer, frontend, backend, QA automation, DevOps, Next.js, React, Tailwind CSS, Framer Motion",
-  url: "https://www.samirkadu.com", // Replace with actual domain
-  image: "/og-image.jpg", // Replace with actual OG image
+  keywords:
+    "Samir Kadu, Full Stack Engineer, Software Engineer, React, Next.js, TypeScript, Node.js, AWS, QA Automation, Bajaj Finserv Health",
+  url: "https://www.samirkadu.com",
+  image: "/og-image.jpg",
 };
 
 export const NAV_LINKS = [
@@ -13,30 +15,76 @@ export const NAV_LINKS = [
   { name: "Skills", href: "#skills" },
   { name: "Projects", href: "#projects" },
   { name: "Experience", href: "#experience" },
-  { name: "Interests", href: "#interests" },
   { name: "Contact", href: "#contact" },
 ];
 
 export const HERO_SECTION = {
   name: "Samir Kadu",
-  tagline: "Full Stack Developer | QA Automation Engineer",
-  introText: "Passionate about crafting innovative solutions and building seamless user experiences.",
-  avatar: "/images/samir-avatar.png", // Placeholder
+  badge: "Open to new opportunities",
+  headline: "Full Stack Engineer",
+  subheadline: "who ships production-ready code.",
+  introText:
+    "3+ years engineering scalable health-tech platforms at Bajaj Finserv Health. I build end-to-end products — from pixel-perfect UIs to robust backend APIs — with a strong focus on quality, performance, and test coverage.",
+  currentRole: "Software Engineer @ Bajaj Finserv Health",
+  location: "Nagpur, India",
+  techStack: ["React", "Next.js", "TypeScript", "Node.js", "AWS"],
+  avatar: "/images/samir-avatar.png",
   ctaButtons: [
+    { text: "View My Work", link: "#projects", type: "scroll" },
     { text: "Download Resume", link: "/Samir_Kadu_Resume.pdf", type: "download" },
-    { text: "Let's Connect", link: "#contact", type: "scroll" },
+  ],
+  stats: [
+    { label: "Years Experience", value: "3+" },
+    { label: "Projects Shipped", value: "25+" },
+    { label: "Technologies", value: "15+" },
+    { label: "AWS Certified", value: "✓" },
   ],
 };
 
 export const ABOUT_ME = {
   title: "About Me",
-  story: "Hello! I'm Samir Kadu, a passionate and dedicated software engineer with a knack for building robust and scalable applications. My journey in tech began with a fascination for how things work, leading me to explore various domains from frontend development to QA automation and DevOps. I thrive on solving complex problems and continuously learning new technologies to deliver high-quality solutions.",
-  goals: "My goal is to leverage my skills to create impactful software that not only meets user needs but also pushes the boundaries of innovation. I am always eager to collaborate on challenging projects and contribute to a team that values creativity and excellence.",
-  passion: "Beyond coding, I am deeply passionate about understanding emerging technologies like AI and ML, and exploring their potential to transform industries. I also enjoy delving into the world of trading and understanding market dynamics.",
+  bio: "I'm a Full Stack Engineer with a knack for building reliable, scalable software. At Bajaj Finserv Health I've contributed to features used by millions — from building responsive UIs to designing automated test suites that cut regression time significantly. I thrive at the intersection of engineering quality and product impact.",
+  currentRole: {
+    title: "Software Engineer",
+    company: "Bajaj Finserv Health",
+    since: "Jan 2023",
+    type: "Full-time",
+  },
+  availability: {
+    label: "Open to opportunities",
+    type: "Full-time / Freelance",
+  },
+  stats: [
+    { label: "Years Experience", value: "3+", description: "in production systems" },
+    { label: "Projects Shipped", value: "25+", description: "personal & professional" },
+    { label: "Technologies", value: "15+", description: "across full stack" },
+    { label: "AWS Certified", value: "SAA", description: "Solutions Architect" },
+  ],
+  highlights: [
+    "Production systems at scale (millions of users)",
+    "End-to-end ownership — design to deployment",
+    "Automated testing that actually prevents bugs",
+    "Clean code that teammates enjoy reading",
+  ],
+  quote: {
+    text: "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
+    author: "Martin Fowler",
+  },
 };
 
 export const SKILLS = {
-  title: "Skills & Knowledge",
+  title: "Skills & Stack",
+  subtitle: "Technologies I use to build reliable, scalable products end-to-end.",
+  // Core stack — shown prominently
+  core: [
+    { name: "React", icon: "/icons/react.svg" },
+    { name: "Next.js", icon: "/icons/nextjs.svg" },
+    { name: "TypeScript", icon: "/icons/typescript.svg" },
+    { name: "Node.js", icon: "/icons/nodejs.svg" },
+    { name: "Python", icon: "/icons/python.svg" },
+    { name: "AWS", icon: "/icons/aws.svg" },
+  ],
+  // Full categories for detail section
   frontend: [
     { name: "React", icon: "/icons/react.svg" },
     { name: "Next.js", icon: "/icons/nextjs.svg" },
@@ -76,106 +124,144 @@ export const SKILLS = {
 export const PROJECTS = [
   {
     id: 1,
-    title: "Go_Bus",
+    title: "Go Bus",
+    tagline: "Full-stack bus booking platform with multi-panel admin",
     description:
-      "An online bus ticket booking platform with panels for Admin, Operator, and User. Features include bus approval, route management, and customer feedback handling.",
+      "End-to-end bus ticket booking system with separate dashboards for Admins, Operators, and Passengers. Built with role-based JWT authentication, real-time seat availability, route management, and a feedback system.",
+    impact: [
+      "Multi-role authentication with JWT — Admin, Operator, Passenger panels",
+      "Real-time seat availability and dynamic route management",
+      "Customer feedback module improving operator accountability",
+    ],
     techStack: ["React", "Spring Boot", "MySQL", "JWT Auth"],
-    image: "/images/go-bus.png", // Placeholder
+    image: "/images/go-bus.png",
     githubLink: "https://github.com/Sameer-Kadu/Go_Bus.git",
     demoLink: "https://go-bus-oarm.vercel.app/",
     category: "work",
+    featured: true,
   },
   {
     id: 2,
     title: "Cultural Tourism Explorer",
+    tagline: "Hackathon winner — data-driven India tourism platform",
     description:
-      "A data-driven storytelling platform created for the Snowflake | YourStory Hero Hackathon. It bridges art, culture, and tourism by showcasing traditional experiences across India using interactive visuals.",
+      "Built in 48 hours for the Snowflake × YourStory Hero Hackathon. A data storytelling platform bridging art, culture, and tourism across India using interactive visualizations powered by Snowflake's data cloud.",
+    impact: [
+      "Built end-to-end in 48 hours for national-level hackathon",
+      "Interactive visualizations across 28+ Indian cultural destinations",
+      "Snowflake data cloud integration for real-time insights",
+    ],
     techStack: ["Snowflake", "Streamlit", "Python", "Pandas"],
-    image: "/images/tourism-hackathon.png", // Placeholder
-    githubLink: "https://github.com/Sameer-Kadu/snowflake-hero-challenge.git", // Replace if different
-    demoLink: "https://wanderwiseindia.streamlit.app/", // Replace if different
+    image: "/images/tourism-hackathon.png",
+    githubLink: "https://github.com/Sameer-Kadu/snowflake-hero-challenge.git",
+    demoLink: "https://wanderwiseindia.streamlit.app/",
     category: "hackathon",
+    featured: false,
   },
 ];
 
-
-
 export const EXPERIENCE_EDUCATION = {
   title: "Experience & Education",
+  subtitle: "The path that shaped how I build software.",
   timeline: [
     {
       type: "experience",
       title: "Software Engineer",
       company: "Bajaj Finserv Health",
-      duration: "Jan 2023 - Present",
+      duration: "Jan 2023 – Present",
+      badge: "Current",
       description:
-        "Developed and maintained various features for their health tech platform, focusing on performance and scalability.",
-      icon: "💼", // ✅ added
+        "Engineering critical features for one of India's leading digital health platforms. Own full-cycle delivery — requirements to production — across frontend, backend, and QA automation.",
+      highlights: [
+        "Built patient-facing features for a platform serving millions of users",
+        "Designed automated test suites with Selenium & Playwright, reducing regression testing time by 60%+",
+        "Contributed to microservices architecture improvements for better system scalability",
+        "Collaborated cross-functionally with product, design, and QA teams in Agile sprints",
+      ],
     },
     {
       type: "education",
-      title: "Post Graduate Diploma in Advanced Computing (PG-DAC)",
-      institution: "CDAC",
-      duration: "Aug 2022 - Jan 2023",
+      title: "Post Graduate Diploma in Advanced Computing",
+      institution: "CDAC (Centre for Development of Advanced Computing)",
+      duration: "Aug 2022 – Jan 2023",
+      badge: "PG-DAC",
       description:
-        "Completed an intensive program covering full-stack development, data structures, and algorithms.",
-      icon: "🎓", // ✅ added
+        "Intensive 6-month program covering the full spectrum of software engineering — from data structures and algorithms to full-stack development, databases, and system design.",
+      highlights: [
+        "Full-stack web development: Java, React, Spring Boot, MySQL",
+        "Core CS fundamentals: DSA, OS, DBMS, Computer Networks",
+        "Graduated with a project-focused capstone (Go Bus platform)",
+      ],
     },
     {
       type: "certification",
       title: "AWS Certified Solutions Architect – Associate",
-      institution: "Amazon Web Services (AWS)",
+      institution: "Amazon Web Services",
       duration: "May 2023",
-      description: "Certified in designing distributed systems on AWS.",
-      icon: "📜", // ✅ added
+      badge: "AWS SAA-C03",
+      description:
+        "Demonstrated expertise in designing distributed, highly available, and fault-tolerant systems on AWS.",
+      highlights: [
+        "Cloud architecture: EC2, S3, RDS, Lambda, VPC, IAM",
+        "High availability and disaster recovery design patterns",
+        "Cost optimization and AWS Well-Architected Framework",
+      ],
     },
   ],
 };
 
-
 export const INTERESTS_HOBBIES = {
   title: "Interests & Hobbies",
   items: [
-  {
-    name: "Trading",
-    icon: "/icons/trading.svg",
-    description: "Passionate about financial markets and algorithmic trading. I explore patterns, backtest strategies, and build trading systems to stay ahead in the game."
-  },
-  {
-    name: "Startups",
-    icon: "/icons/startup.svg",
-    description: "Inspired by innovation and solving real-world problems, I love brainstorming startup ideas and turning tech concepts into scalable solutions."
-  },
-  {
-    name: "Artificial Intelligence",
-    icon: "/icons/ai.svg",
-    description: "AI fascinates me — from neural networks to intelligent automation. I enjoy learning how machines think and apply that to building smarter applications."
-  },
-  {
-    name: "Machine Learning",
-    icon: "/icons/ml.svg",
-    description: "Exploring ML algorithms, data models, and their practical applications excites me. I often experiment with real-world datasets to deepen my understanding."
-  },
-  {
-    name: "Reading",
-    icon: "/icons/reading.svg",
-    description: "I enjoy reading non-fiction, especially tech blogs, startup stories, and books on personal growth and decision-making."
-  },
-  {
-    name: "Traveling",
-    icon: "/icons/travel.svg",
-    description: "Traveling helps me recharge and gain new perspectives. I find inspiration in different cultures, landscapes, and stories from around the world."
-  }
-]
-
+    {
+      name: "Algorithmic Trading",
+      icon: "/icons/trading.svg",
+      description:
+        "I explore quantitative trading strategies — backtesting systems, studying market microstructure, and building data-driven models to understand price behavior.",
+    },
+    {
+      name: "Startups",
+      icon: "/icons/startup.svg",
+      description:
+        "Passionate about how zero-to-one products are built. I follow startup ecosystems, study business models, and love the challenge of turning a technical idea into a real product.",
+    },
+    {
+      name: "Artificial Intelligence",
+      icon: "/icons/ai.svg",
+      description:
+        "Fascinated by how machines learn and reason. I follow AI research closely and enjoy experimenting with LLMs, embeddings, and intelligent automation.",
+    },
+    {
+      name: "Machine Learning",
+      icon: "/icons/ml.svg",
+      description:
+        "I enjoy working with real-world datasets — training models, analyzing features, and applying ML to solve practical problems.",
+    },
+    {
+      name: "Reading",
+      icon: "/icons/reading.svg",
+      description:
+        "Non-fiction: engineering, startups, psychology of decision-making. Favorite reads include The Lean Startup, Zero to One, and Thinking, Fast and Slow.",
+    },
+    {
+      name: "Traveling",
+      icon: "/icons/travel.svg",
+      description:
+        "New places sharpen my perspective. I find that exploring different cultures makes me a better product thinker and problem solver.",
+    },
+  ],
 };
 
 export const CONTACT_ME = {
-  title: "Get in Touch",
-  description: "Have a question or want to work together? Feel free to reach out!",
-  email: "samirkadu8@gmail.com", // Replace with actual email
-  linkedin: "https://www.linkedin.com/in/sameer-kadu/", // Replace with actual LinkedIn
-  github: "https://github.com/Sameer-Kadu", // Replace with actual GitHub
+  title: "Let's Build Something Together",
+  description:
+    "I'm open to full-time roles, freelance projects, and interesting collaborations. Whether you have a clear brief or just an idea — let's talk.",
+  email: "samirkadu8@gmail.com",
+  linkedin: "https://www.linkedin.com/in/sameer-kadu/",
+  github: "https://github.com/Sameer-Kadu",
+  availability: "Open to opportunities",
+  responseTime: "Responds within 24 hours",
+  location: "Nagpur, Maharashtra, India",
 };
 
-export const FOOTER_TEXT = "© 2024 Samir Kadu. All rights reserved.";
+export const FOOTER_TEXT = `© ${new Date().getFullYear()} Samir Kadu. Designed & built with Next.js, Tailwind CSS & Framer Motion.`;
