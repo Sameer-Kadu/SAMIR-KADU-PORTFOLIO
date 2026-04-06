@@ -31,7 +31,7 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white dark:bg-[#0A0E1A]"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white/80 dark:bg-[#0A0E1A]/80"
     >
       {/* Mesh gradient background */}
       <div
@@ -45,7 +45,7 @@ const HeroSection = () => {
           <div className="absolute bottom-0 left-1/3 w-[400px] h-[400px] bg-cyan-600/6 rounded-full blur-[80px]" />
           {/* Grid overlay */}
           <div
-            className="absolute inset-0 opacity-[0.03]"
+            className="absolute inset-0 opacity-[0.14]"
             style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
             }}

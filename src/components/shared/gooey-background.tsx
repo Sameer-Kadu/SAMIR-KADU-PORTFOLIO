@@ -27,7 +27,7 @@ const GooeyBackground = memo(({ activeIndex, itemCount, containerRef }: GooeyBac
     ctx.scale(dpr, dpr)
 
     // Reduced particle count for better performance
-    const particleCount = 12
+    const particleCount = 24
     const colors = ["#3b82f6", "#8b5cf6", "#06b6d4", "#10b981"]
 
     // Initialize particles only once
@@ -120,7 +120,7 @@ const GooeyBackground = memo(({ activeIndex, itemCount, containerRef }: GooeyBac
         }
 
         // Move towards target with stronger easing when far, gentler when close
-        const easingStrength = Math.min(distanceToTarget / 50, 1) * 0.10 + 0.02
+        const easingStrength = Math.min(distanceToTarget / 50, 1) * 0.02 + 0.02
 
         if (!particle.isAtTarget) {
           particle.x += (particle.targetX - particle.x) * easingStrength
@@ -132,8 +132,8 @@ const GooeyBackground = memo(({ activeIndex, itemCount, containerRef }: GooeyBac
         }
 
         // Minimal random movement
-        particle.x += particle.vx * 0.2
-        particle.y += particle.vy * 0.2
+        particle.x += particle.vx * 0.8
+        particle.y += particle.vy * 0.8
 
         // Boundary check with gentler bouncing
         if (particle.x < 5 || particle.x > rect.width - 5) particle.vx *= -0.3
