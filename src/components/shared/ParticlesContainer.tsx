@@ -76,7 +76,7 @@ const ParticlesContainer = memo(() => {
         id="tsparticles"
         particlesLoaded={particlesLoaded}
         options={options}
-        className="absolute top-0 left-0 w-full h-full z-[1]"
+        className="absolute top-0 left-0 w-full h-full"
       />
     );
   }
