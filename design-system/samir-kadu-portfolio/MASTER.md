@@ -1,203 +1,124 @@
-# Design System Master File
-
-> **LOGIC:** When building a specific page, first check `design-system/pages/[page-name].md`.
-> If that file exists, its rules **override** this Master file.
-> If not, strictly follow the rules below.
-
----
+# Design System — The Engineer's Workspace
 
 **Project:** Samir Kadu Portfolio
-**Generated:** 2026-04-05 16:49:51
-**Category:** Luxury/Premium Brand
+**Concept:** An indexed engineering workspace — instrument panels, numbered modules, and monospace metadata, without pastiching an operating system.
+
+The source of truth for tokens is `src/app/globals.css`. Tailwind reads those same CSS
+variables via `tailwind.config.mjs`, so there is exactly one place to change a colour.
 
 ---
 
-## Global Rules
+## Surfaces
 
-### Color Palette
+Four levels, light and dark. Never introduce a fifth.
 
-| Role | Hex | CSS Variable |
-|------|-----|--------------|
-| Primary | `#18181B` | `--color-primary` |
-| Secondary | `#3F3F46` | `--color-secondary` |
-| CTA/Accent | `#2563EB` | `--color-cta` |
-| Background | `#FAFAFA` | `--color-background` |
-| Text | `#09090B` | `--color-text` |
+| Token | Purpose |
+|---|---|
+| `--bg` / `bg-bg` | Page background |
+| `--bg-sunken` / `bg-sunken` | Alternating module bands, image wells |
+| `--panel` / `bg-panel` | Cards, list containers |
+| `--panel-raised` / `bg-raised` | Floating surfaces — command palette, mobile sheet |
 
-**Color Notes:** Monochrome + blue accent
+Depth comes from hairlines and a single soft shadow, not from stacked glass.
 
-### Typography
+- `--line` — default hairline, used for every border
+- `--line-strong` — emphasis hairline (active nodes, key caps, crosshair marks)
+- `--shadow-panel` / `--shadow-float` — the only two elevations
 
-- **Heading Font:** Caveat
-- **Body Font:** Quicksand
-- **Mood:** handwritten, personal, friendly, casual, warm, charming
-- **Google Fonts:** [Caveat + Quicksand](https://fonts.google.com/share?selection.family=Caveat:wght@400;500;600;700|Quicksand:wght@300;400;500;600;700)
+## Text
 
-**CSS Import:**
-```css
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap');
-```
+| Token | Contrast on `--bg` | Use |
+|---|---|---|
+| `text-ink` | 17.9:1 light / 16.4:1 dark | Headings, primary copy |
+| `text-ink-2` | 7.2:1 / 8.0:1 | Body, descriptions |
+| `text-ink-3` | 5.3:1 / 4.8:1 | Metadata, technical labels |
 
-### Spacing Variables
+All three clear WCAG AA (4.5:1). If a colour is edited, re-check the ratio — the
+comments in `globals.css` record the measured values.
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| `--space-xs` | `4px` / `0.25rem` | Tight gaps |
-| `--space-sm` | `8px` / `0.5rem` | Icon gaps, inline spacing |
-| `--space-md` | `16px` / `1rem` | Standard padding |
-| `--space-lg` | `24px` / `1.5rem` | Section padding |
-| `--space-xl` | `32px` / `2rem` | Large gaps |
-| `--space-2xl` | `48px` / `3rem` | Section margins |
-| `--space-3xl` | `64px` / `4rem` | Hero padding |
+## Signal colours
 
-### Shadow Depths
+`--accent` (blue) marks the active thing and nothing else — active nav module,
+selected domain, current tier, primary button. `--live` (green) is reserved for
+status ("deployed", "open to opportunities"). `--warn` (amber) is used once, for
+the certification badge.
 
-| Level | Value | Usage |
-|-------|-------|-------|
-| `--shadow-sm` | `0 1px 2px rgba(0,0,0,0.05)` | Subtle lift |
-| `--shadow-md` | `0 4px 6px rgba(0,0,0,0.1)` | Cards, buttons |
-| `--shadow-lg` | `0 10px 15px rgba(0,0,0,0.1)` | Modals, dropdowns |
-| `--shadow-xl` | `0 20px 25px rgba(0,0,0,0.15)` | Hero images, featured cards |
+## Typography
 
----
+| Role | Family | Notes |
+|---|---|---|
+| Headings | Space Grotesk (`--font-heading`) | `-0.022em` tracking, `text-wrap: balance` |
+| Body | DM Sans (`--font-body`) | 1.7–1.75 line-height on prose |
+| Metadata | JetBrains Mono (`--font-mono`) | Tabular numerals |
 
-## Component Specs
+Section titles use `clamp(1.75rem, 4.2vw, 2.75rem)`; the hero uses
+`clamp(2.5rem, 8vw, 4.25rem)`. No fixed heading sizes — every display size scales.
 
-### Buttons
+### The `.tech-label`
 
-```css
-/* Primary Button */
-.btn-primary {
-  background: #2563EB;
-  color: white;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: all 200ms ease;
-  cursor: pointer;
-}
+The monospace voice of the site: 11px, `0.14em` tracking, uppercase, `--text-3`.
+Used for eyebrows, field labels and module codes. It is what makes the page read
+as an instrument rather than a brochure.
 
-.btn-primary:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-}
+## Layout
 
-/* Secondary Button */
-.btn-secondary {
-  background: transparent;
-  color: #18181B;
-  border: 2px solid #18181B;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: all 200ms ease;
-  cursor: pointer;
-}
-```
+- `.shell` — max width `78rem`, responsive gutters (20 / 32 / 40px)
+- `.section-pad` — 5.5rem block padding, 8rem from `md` up
+- `--nav-h` (3.5rem) drives both the fixed header and every `scroll-mt`
 
-### Cards
+Breakpoints: `xs` 430 · `sm` 640 · `md` 768 · `lg` 1024 · `xl` 1280.
+`lg` is the real fork — below it the radial domain network becomes a tap-to-expand
+list, and the nav becomes a sheet.
 
-```css
-.card {
-  background: #FAFAFA;
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: var(--shadow-md);
-  transition: all 200ms ease;
-  cursor: pointer;
-}
+## Motion
 
-.card:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-2px);
-}
-```
+Three speeds, one easing family. Defined once in `globals.css` and mirrored in
+`src/lib/motion.ts` so CSS and Framer Motion agree.
 
-### Inputs
+| Token | Duration | Use |
+|---|---|---|
+| `--dur-fast` | 150ms | Interaction feedback — hover, press |
+| `--dur-med` | 320ms | Component transitions — expand, dim, dialog |
+| `--dur-slow` | 640ms | Section storytelling — scroll reveals |
 
-```css
-.input {
-  padding: 12px 16px;
-  border: 1px solid #E2E8F0;
-  border-radius: 8px;
-  font-size: 16px;
-  transition: border-color 200ms ease;
-}
+Easing: `--ease` `cubic-bezier(0.22, 1, 0.36, 1)` for entrances,
+`--ease-inout` `cubic-bezier(0.65, 0, 0.35, 1)` for symmetric moves.
 
-.input:focus {
-  border-color: #18181B;
-  outline: none;
-  box-shadow: 0 0 0 3px #18181B20;
-}
-```
+Animate `transform` and `opacity` only. Every reveal is `once: true` — nothing
+re-animates on scroll-back. `prefers-reduced-motion` disables decorative motion
+globally; content still reveals, it just arrives instantly.
 
-### Modals
+## Component primitives
 
-```css
-.modal-overlay {
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
-}
+`.panel` · `.panel-raised` · `.btn` (`.btn-primary`, `.btn-ghost`) · `.kbd` ·
+`.status-dot` · `.corner-marks` (crosshair framing) · `.tap` (44px touch floor on
+coarse pointers and small viewports) · `.link-underline` (underline grows on hover).
 
-.modal {
-  background: white;
-  border-radius: 16px;
-  padding: 32px;
-  box-shadow: var(--shadow-xl);
-  max-width: 500px;
-  width: 90%;
-}
-```
+## Rules
 
----
+- Numbering is structural. Modules are `00`–`06` in the nav, the left rail, the
+  footer index and the command palette — all read from `MODULES` in `src/content/site.ts`.
+- One accent. If two things are blue, one of them is wrong.
+- Hover is never the only affordance — every hover state has a focus equivalent.
+- Content lives in `src/content/`. Components take data as props and never inline copy.
+- Sections render only what exists in the data. Absent information is omitted, never
+  filled with placeholder prose.
 
-## Style Guidelines
+## Anti-patterns
 
-**Style:** Liquid Glass
+- ❌ Neon glows, purple gradients, glassmorphism everywhere
+- ❌ Skill proficiency percentages
+- ❌ Emoji as icons (use Lucide, or the SVGs in `public/icons`)
+- ❌ Scroll hijacking or animations the visitor must wait through
+- ❌ New colour values in components — add a token instead
+- ❌ Animating `width`, `height`, `top`, `left`
 
-**Keywords:** Flowing glass, morphing, smooth transitions, fluid effects, translucent, animated blur, iridescent, chromatic aberration
+## Pre-delivery checklist
 
-**Best For:** Premium SaaS, high-end e-commerce, creative platforms, branding experiences, luxury portfolios
-
-**Key Effects:** Morphing elements (SVG/CSS), fluid animations (400-600ms curves), dynamic blur (backdrop-filter), color transitions
-
-### Page Pattern
-
-**Pattern Name:** Portfolio Grid
-
-- **Conversion Strategy:**  hover overlay info,  lightbox view, Visuals first. Filter by category. Fast loading essential.
-- **CTA Placement:** Project Card Hover + Footer Contact
-- **Section Order:** 1. Hero (Name/Role), 2. Project Grid (Masonry), 3. About/Philosophy, 4. Contact
-
----
-
-## Anti-Patterns (Do NOT Use)
-
-- ❌ Cheap visuals
-- ❌ Fast animations
-
-### Additional Forbidden Patterns
-
-- ❌ **Emojis as icons** — Use SVG icons (Heroicons, Lucide, Simple Icons)
-- ❌ **Missing cursor:pointer** — All clickable elements must have cursor:pointer
-- ❌ **Layout-shifting hovers** — Avoid scale transforms that shift layout
-- ❌ **Low contrast text** — Maintain 4.5:1 minimum contrast ratio
-- ❌ **Instant state changes** — Always use transitions (150-300ms)
-- ❌ **Invisible focus states** — Focus states must be visible for a11y
-
----
-
-## Pre-Delivery Checklist
-
-Before delivering any UI code, verify:
-
-- [ ] No emojis used as icons (use SVG instead)
-- [ ] All icons from consistent icon set (Heroicons/Lucide)
-- [ ] `cursor-pointer` on all clickable elements
-- [ ] Hover states with smooth transitions (150-300ms)
-- [ ] Light mode: text contrast 4.5:1 minimum
-- [ ] Focus states visible for keyboard navigation
-- [ ] `prefers-reduced-motion` respected
-- [ ] Responsive: 375px, 768px, 1024px, 1440px
-- [ ] No content hidden behind fixed navbars
-- [ ] No horizontal scroll on mobile
+- [ ] `npm run build` and `npm run lint` clean
+- [ ] `npx tsc --noEmit` clean (strict mode)
+- [ ] No horizontal overflow at 375 / 430 / 768 / 1024 / 1440
+- [ ] Touch targets ≥ 44px below `md`
+- [ ] Keyboard path works: skip link → nav → modules → palette (⌘K) → dialogs (Esc)
+- [ ] Both themes checked, contrast ≥ 4.5:1
+- [ ] `prefers-reduced-motion` honoured

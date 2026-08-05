@@ -2,39 +2,354 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Font variables ── */
+/* ============================================================
+   DESIGN SYSTEM — "Engineering Workspace"
+   Surfaces, lines, text hierarchy, accent, motion.
+   Dark is the primary environment; light is a full peer.
+   ============================================================ */
+
 @layer base {
   :root {
-    --font-heading: "Space Grotesk", sans-serif;
-    --font-body: "DM Sans", sans-serif;
+    /* — Surface hierarchy (light) — */
+    --bg: 249 249 247;
+    --bg-sunken: 243 243 240;
+    --panel: 255 255 255;
+    --panel-raised: 255 255 255;
+
+    /* — Lines — */
+    --line: 12 16 24 / 0.1;
+    --line-strong: 12 16 24 / 0.18;
+    --grid: 12 16 24 / 0.045;
+
+    /* — Text hierarchy — */
+    /* Contrast against --bg: text 17.9:1, text-2 7.2:1, text-3 5.3:1 (AA). */
+    --text: 11 14 20;
+    --text-2: 74 83 97;
+    --text-3: 95 104 117;
+
+    /* — Signal colours — */
+    --accent: 29 92 214;
+    --accent-soft: 29 92 214 / 0.09;
+    --live: 5 150 105;
+    --warn: 180 118 20;
+
+    /* — Elevation — */
+    --shadow-panel: 0 1px 2px rgb(12 16 24 / 0.04), 0 8px 24px -12px rgb(12 16 24 / 0.12);
+    --shadow-float: 0 2px 4px rgb(12 16 24 / 0.04), 0 24px 60px -20px rgb(12 16 24 / 0.22);
+  }
+
+  .dark {
+    --bg: 8 10 14;
+    --bg-sunken: 5 7 10;
+    --panel: 14 17 23;
+    --panel-raised: 19 23 31;
+
+    --line: 255 255 255 / 0.08;
+    --line-strong: 255 255 255 / 0.16;
+    --grid: 255 255 255 / 0.035;
+
+    /* Contrast against --bg: text 16.4:1, text-2 8.0:1, text-3 4.8:1 (AA). */
+    --text: 233 237 243;
+    --text-2: 151 161 176;
+    --text-3: 116 126 142;
+
+    --accent: 92 152 255;
+    --accent-soft: 92 152 255 / 0.12;
+    --live: 52 199 137;
+    --warn: 226 170 74;
+
+    --shadow-panel: 0 1px 0 rgb(255 255 255 / 0.035) inset, 0 12px 32px -16px rgb(0 0 0 / 0.7);
+    --shadow-float: 0 1px 0 rgb(255 255 255 / 0.05) inset, 0 32px 80px -24px rgb(0 0 0 / 0.85);
+  }
+
+  :root {
+    /* — Motion system: three speeds, one easing family — */
+    --dur-fast: 150ms;   /* interaction feedback */
+    --dur-med: 320ms;    /* component transitions */
+    --dur-slow: 640ms;   /* section storytelling */
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);      /* out-expo — the default */
+    --ease-inout: cubic-bezier(0.65, 0, 0.35, 1); /* symmetric moves */
+
+    /* — Layout — */
+    --rail: 3.25rem;         /* left technical rail width (desktop) */
+    --shell-max: 78rem;
+    --nav-h: 3.5rem;
+  }
+
+  * {
+    border-color: rgb(var(--line));
   }
 
   html {
-    font-family: var(--font-body);
+    font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+    -webkit-text-size-adjust: 100%;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
-    letter-spacing: -0.02em;
+  body {
+    background-color: rgb(var(--bg));
+    color: rgb(var(--text));
+    /* Prevents any child overflow from creating a horizontal scrollbar */
+    overflow-x: clip;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.022em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: rgb(var(--accent) / 0.22);
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  /* Only elements that opt in get a custom scrollbar; the page keeps the native one. */
+  .scroll-slim {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--text-3) / 0.4) transparent;
+  }
+  .scroll-slim::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scroll-slim::-webkit-scrollbar-thumb {
+    background: rgb(var(--text-3) / 0.35);
+    border-radius: 99px;
+  }
+  .scroll-slim::-webkit-scrollbar-track {
+    background: transparent;
   }
 }
 
-/* ── Performance: promote animated elements to their own composite layer ── */
-.animate-pulse,
-.animate-bounce,
-.animate-spin,
-.animate-float {
-  will-change: transform, opacity;
+/* ============================================================
+   COMPONENT PRIMITIVES
+   ============================================================ */
+
+@layer components {
+  /* Technical label — the monospace metadata voice used across the site */
+  .tech-label {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 0.6875rem;
+    line-height: 1;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(var(--text-3));
+    font-variant-numeric: tabular-nums;
+  }
+
+  .panel {
+    background-color: rgb(var(--panel));
+    border: 1px solid rgb(var(--line));
+    border-radius: 0.75rem;
+  }
+
+  .panel-raised {
+    background-color: rgb(var(--panel-raised));
+    border: 1px solid rgb(var(--line));
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-panel);
+  }
+
+  /* Hairline crosshair corners — recurring motif for "instrument" framing */
+  .corner-marks::before,
+  .corner-marks::after {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-color: rgb(var(--line-strong));
+    pointer-events: none;
+  }
+  .corner-marks::before {
+    top: -1px;
+    left: -1px;
+    border-top: 1px solid;
+    border-left: 1px solid;
+  }
+  .corner-marks::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 2.75rem;
+    padding-inline: 1.125rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 550;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color var(--dur-fast) var(--ease),
+                border-color var(--dur-fast) var(--ease),
+                color var(--dur-fast) var(--ease),
+                transform var(--dur-fast) var(--ease);
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+
+  .btn-primary {
+    background-color: rgb(var(--accent));
+    color: #fff;
+    border: 1px solid rgb(var(--accent));
+  }
+  .btn-primary:hover {
+    background-color: rgb(var(--accent) / 0.88);
+  }
+
+  .btn-ghost {
+    background-color: transparent;
+    color: rgb(var(--text));
+    border: 1px solid rgb(var(--line-strong));
+  }
+  .btn-ghost:hover {
+    background-color: rgb(var(--text) / 0.045);
+    border-color: rgb(var(--text) / 0.28);
+  }
+
+  /* Keyboard key cap */
+  .kbd {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 0.6875rem;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.35rem;
+    height: 1.35rem;
+    padding-inline: 0.3rem;
+    border-radius: 0.25rem;
+    border: 1px solid rgb(var(--line-strong));
+    background-color: rgb(var(--text) / 0.04);
+    color: rgb(var(--text-2));
+  }
+
+  /* Live status dot — pulses only when motion is allowed */
+  .status-dot {
+    position: relative;
+    display: inline-block;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 99px;
+    background-color: rgb(var(--live));
+    flex-shrink: 0;
+  }
+  .status-dot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 99px;
+    background-color: rgb(var(--live));
+    animation: ping 2.4s var(--ease-inout) infinite;
+  }
 }
 
-/* ── Performance: smooth scrolling only when no motion preference ── */
+@layer utilities {
+  .shell {
+    width: 100%;
+    max-width: var(--shell-max);
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .shell { padding-inline: 2rem; }
+  }
+  @media (min-width: 1280px) {
+    .shell { padding-inline: 2.5rem; }
+  }
+
+  .section-pad {
+    padding-block: 5.5rem;
+  }
+  @media (min-width: 768px) {
+    .section-pad { padding-block: 8rem; }
+  }
+
+  .font-mono-tech {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Hairline rules used to divide modules */
+  .rule-t { border-top: 1px solid rgb(var(--line)); }
+  .rule-b { border-bottom: 1px solid rgb(var(--line)); }
+
+  /* Text that fades to the accent at the tail — used sparingly on section titles */
+  .text-dim {
+    color: rgb(var(--text-3));
+  }
+
+  /*
+   * Touch target floor. Applied on coarse pointers and on small viewports, so
+   * phones and tablets get a comfortable 44px hit area while large-screen
+   * mouse users keep the intended density.
+   */
+  @media (pointer: coarse), (max-width: 767px) {
+    .tap {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
+
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size var(--dur-med) var(--ease);
+  }
+  .link-underline:hover {
+    background-size: 100% 1px;
+  }
+}
+
+/* ============================================================
+   KEYFRAMES — kept minimal and transform/opacity only
+   ============================================================ */
+
+@keyframes ping {
+  0%   { transform: scale(1); opacity: 0.7; }
+  70%  { transform: scale(2.6); opacity: 0; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+@keyframes caret {
+  0%, 45%  { opacity: 1; }
+  50%, 95% { opacity: 0; }
+}
+
+@keyframes dash-flow {
+  to { stroke-dashoffset: -1000; }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translate3d(0, 14px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ============================================================
+   REDUCED MOTION — decorative motion off, content still reveals
+   ============================================================ */
+
 @media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
 }
 
-/* ── Accessibility: disable all decorative animations for users who prefer it ── */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -44,108 +359,36 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  .status-dot::after { display: none; }
 }
 
-/* ── Performance: prevent layout thrash from backdrop-blur on low-end devices ── */
+/* Fallback when backdrop-filter is unsupported */
 @supports not (backdrop-filter: blur(1px)) {
-  .backdrop-blur-sm,
-  .backdrop-blur-md,
-  .backdrop-blur-xl,
-  .backdrop-blur-3xl {
-    backdrop-filter: none;
-    background-color: rgba(255, 255, 255, 0.95);
-  }
-  .dark .backdrop-blur-sm,
-  .dark .backdrop-blur-md,
-  .dark .backdrop-blur-xl,
-  .dark .backdrop-blur-3xl {
-    background-color: rgba(10, 14, 26, 0.97);
+  .glass {
+    background-color: rgb(var(--bg) / 0.97) !important;
   }
 }
 
-/* ── Gradient text utility ── */
-@layer utilities {
-  .text-gradient {
-    background: linear-gradient(135deg, #2563eb 0%, #6366f1 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .text-gradient-warm {
-    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .border-gradient {
-    border: 1px solid transparent;
-    background-clip: padding-box;
-    background-color: transparent;
-  }
-
-  .glass-card {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.07);
-  }
-
-  .glass-card-light {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-  }
-
-  .section-padding {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-  }
-
-  @media (min-width: 768px) {
-    .section-padding {
-      padding-top: 8rem;
-      padding-bottom: 8rem;
-    }
-  }
+.glass {
+  background-color: rgb(var(--bg) / 0.72);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
 }
 
-/* ── Selection color ── */
-::selection {
-  background: rgba(37, 99, 235, 0.25);
-  color: inherit;
+/* ============================================================
+   CUSTOM CURSOR
+   The class is added by <Cursor /> after mount, so if JS never runs the
+   native cursor is untouched. Text entry always keeps its own caret.
+   ============================================================ */
+
+.has-custom-cursor,
+.has-custom-cursor * {
+  cursor: none;
 }
 
-/* ── Scrollbar styling ── */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(37, 99, 235, 0.3);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(37, 99, 235, 0.5);
-}
-
-/* ── Focus ring ── */
-:focus-visible {
-  outline: 2px solid #2563eb;
-  outline-offset: 3px;
-  border-radius: 4px;
-}
-
-/* ── Section divider ── */
-.section-divider {
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(37, 99, 235, 0.2),
-    rgba(99, 102, 241, 0.2),
-    transparent
-  );
+.has-custom-cursor input,
+.has-custom-cursor textarea,
+.has-custom-cursor select,
+.has-custom-cursor [contenteditable="true"] {
+  cursor: auto;
 }
