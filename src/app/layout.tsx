@@ -10,6 +10,8 @@ import Footer from "@/components/system/Footer";
 import BootSequence from "@/components/system/BootSequence";
 import GridBackdrop from "@/components/system/GridBackdrop";
 import Cursor from "@/components/system/Cursor";
+import ExperienceModeProvider from "@/lib/explorer/mode";
+import ExperienceShell from "@/components/system/ExperienceShell";
 
 const heading = Space_Grotesk({
   subsets: ["latin"],
@@ -107,14 +109,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="font-body antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          <CommandPaletteProvider>
-            <GridBackdrop />
-            <BootSequence />
-            <WorkspaceNav />
-            <main id="main">{children}</main>
-            <Footer />
-            <Cursor />
-          </CommandPaletteProvider>
+          <ExperienceModeProvider>
+            <CommandPaletteProvider>
+              <ExperienceShell>
+                <GridBackdrop />
+                <BootSequence />
+                <WorkspaceNav />
+                <main id="main">{children}</main>
+                <Footer />
+                <Cursor />
+              </ExperienceShell>
+            </CommandPaletteProvider>
+          </ExperienceModeProvider>
         </ThemeProvider>
       </body>
     </html>

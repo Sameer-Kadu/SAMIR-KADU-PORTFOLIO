@@ -8,6 +8,7 @@ import { useSectionSpy } from "@/lib/hooks/useSectionSpy";
 import { scrollToModule } from "@/lib/scroll";
 import { useCommandPalette } from "./CommandPaletteProvider";
 import ThemeToggle from "./ThemeToggle";
+import ModeSwitch from "./ModeSwitch";
 import { EASE } from "@/lib/motion";
 
 /**
@@ -102,6 +103,11 @@ export default function WorkspaceNav() {
           </ul>
 
           <div className="ml-auto flex items-center gap-2 lg:ml-2">
+            {/* Experience switch — only renders on Explorer-capable devices */}
+            <div className="hidden lg:block">
+              <ModeSwitch />
+            </div>
+
             {/* Command palette trigger — discoverable without the shortcut */}
             <button
               type="button"
