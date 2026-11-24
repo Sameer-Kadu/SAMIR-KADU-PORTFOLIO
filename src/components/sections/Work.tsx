@@ -11,6 +11,16 @@ import type { Project } from "@/content/types";
 import { childVariants, inViewOnce, staggerVariants } from "@/lib/motion";
 import Module from "@/components/system/Module";
 
+/** Keeps the section intro in step with however many projects exist. */
+const COUNT_WORDS: Record<number, string> = {
+  1: "One",
+  2: "Two",
+  3: "Three",
+  4: "Four",
+  5: "Five",
+  6: "Six",
+};
+
 /** The case study is a large view — only loaded once a project is opened. */
 const CaseStudy = dynamic(() => import("./work/CaseStudy"), { ssr: false });
 
@@ -103,13 +113,27 @@ function ProjectRow({ project, onOpen }: { project: Project; onOpen: () => void 
             aria-label={`Open the ${project.title} case study`}
             className="relative order-1 aspect-[1.92/1] overflow-hidden border-b border-line bg-sunken md:order-2 md:aspect-auto md:border-b-0 md:border-l"
           >
-            <Image
-              src={project.image}
-              alt=""
-              fill
-              sizes="(max-width: 768px) 100vw, 320px"
-              className="object-cover object-top transition-transform duration-slow group-hover:scale-[1.03]"
-            />
+            {project.image ? (
+              <Image
+                src={project.image}
+                alt=""
+                fill
+                sizes="(max-width: 768px) 100vw, 420px"
+                /* contain, not cover: these are UI screenshots in a tall column,
+                   and cover cropped away the headline and left edge. */
+                className="object-contain p-4 transition-transform duration-slow group-hover:scale-[1.03]"
+              />
+            ) : (
+              /* No screenshot yet: a typographic placeholder in the same frame. */
+              <span className="absolute inset-0 grid place-items-center p-6 text-center transition-transform duration-slow group-hover:scale-[1.03]">
+                <span>
+                  <span className="tech-label block">{project.index}</span>
+                  <span className="mt-2 block text-[1rem] font-semibold text-ink-2">
+                    {project.title}
+                  </span>
+                </span>
+              </span>
+            )}
             <span
               className="absolute inset-0 bg-gradient-to-t from-bg/50 to-transparent opacity-0 transition-opacity duration-med group-hover:opacity-100"
               aria-hidden="true"
@@ -130,7 +154,7 @@ export default function Work() {
       index="03"
       code="work"
       title="Systems I've designed and shipped."
-      lead="Two case studies, each documented the way I'd document it for a team: the problem, the approach, the architecture, and the decisions behind it."
+      lead={`${COUNT_WORDS[PROJECTS.length] ?? PROJECTS.length} case studies, each documented the way I'd document it for a team: the problem, the approach, the architecture, and the decisions behind it.`}
     >
       <motion.ul
         variants={staggerVariants(0.1)}

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Award, Briefcase } from "lucide-react";
-import { METRICS, PRINCIPLES, PROFILE, STORY } from "@/content/profile";
+import { HIGHLIGHT_AWARD, METRICS, PRINCIPLES, PROFILE, STORY } from "@/content/profile";
 import { childVariants, inViewOnce, staggerVariants } from "@/lib/motion";
 import Module from "@/components/system/Module";
 
@@ -111,18 +111,18 @@ export default function Profile() {
             </div>
           </motion.div>
 
-          {/* Certification */}
+          {/* Award */}
           <motion.div variants={childVariants} className="rounded-xl border border-line bg-panel p-5">
             <div className="flex items-start gap-3">
               <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-line text-warn">
                 <Award className="h-4 w-4" />
               </span>
               <div className="min-w-0">
-                <p className="tech-label">certified</p>
+                <p className="tech-label">{HIGHLIGHT_AWARD.label}</p>
                 <p className="mt-1.5 text-[0.875rem] font-medium leading-snug text-ink">
-                  AWS Solutions Architect
+                  {HIGHLIGHT_AWARD.title}
                 </p>
-                <p className="text-[0.75rem] text-ink-3">Associate · SAA-C03</p>
+                <p className="text-[0.75rem] text-ink-3">{HIGHLIGHT_AWARD.detail}</p>
               </div>
             </div>
           </motion.div>

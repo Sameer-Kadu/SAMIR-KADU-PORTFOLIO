@@ -5,10 +5,10 @@ import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from 
 import { Command, Menu, X } from "lucide-react";
 import { MODULES, SITE } from "@/content/site";
 import { useSectionSpy } from "@/lib/hooks/useSectionSpy";
+import { useModifierKey } from "@/lib/hooks/useModifierKey";
 import { scrollToModule } from "@/lib/scroll";
 import { useCommandPalette } from "./CommandPaletteProvider";
 import ThemeToggle from "./ThemeToggle";
-import ModeSwitch from "./ModeSwitch";
 import { EASE } from "@/lib/motion";
 
 /**
@@ -23,6 +23,7 @@ export default function WorkspaceNav() {
   const active = useSectionSpy(ids);
   const [menuOpen, setMenuOpen] = useState(false);
   const palette = useCommandPalette();
+  const modKey = useModifierKey();
   const reduceMotion = useReducedMotion();
 
   const { scrollYProgress } = useScroll();
@@ -103,19 +104,18 @@ export default function WorkspaceNav() {
           </ul>
 
           <div className="ml-auto flex items-center gap-2 lg:ml-2">
-            {/* Experience switch — only renders on Explorer-capable devices */}
-            <div className="hidden lg:block">
-              <ModeSwitch />
-            </div>
-
             {/* Command palette trigger — discoverable without the shortcut */}
             <button
               type="button"
               onClick={palette.toggle}
               className="hidden h-9 items-center gap-2 rounded-lg border border-line px-2.5 text-ink-3 transition-colors duration-fast hover:border-line-strong hover:text-ink-2 md:flex"
-              aria-label="Open command palette"
+              aria-label={`Open command palette (${modKey === "⌘" ? "Command" : "Ctrl"} K)`}
             >
-              <Command className="h-3.5 w-3.5" />
+              {modKey === "⌘" ? (
+                <Command className="h-3.5 w-3.5" />
+              ) : (
+                <span className="font-mono-tech text-[0.6875rem]">Ctrl</span>
+              )}
               <span className="font-mono-tech text-[0.6875rem]">K</span>
             </button>
 

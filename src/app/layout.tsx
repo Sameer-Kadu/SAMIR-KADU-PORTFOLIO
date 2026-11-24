@@ -10,8 +10,6 @@ import Footer from "@/components/system/Footer";
 import BootSequence from "@/components/system/BootSequence";
 import GridBackdrop from "@/components/system/GridBackdrop";
 import Cursor from "@/components/system/Cursor";
-import ExperienceModeProvider from "@/lib/explorer/mode";
-import ExperienceShell from "@/components/system/ExperienceShell";
 
 const heading = Space_Grotesk({
   subsets: ["latin"],
@@ -52,13 +50,13 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     title: SITE.title,
     description: SITE.shortDescription,
-    images: [{ url: SITE.ogImage, width: 1200, height: 630, alt: SITE.title }],
+    // Image comes from app/opengraph-image.tsx (generated, always in sync).
   },
   twitter: {
     card: "summary_large_image",
     title: SITE.title,
     description: SITE.shortDescription,
-    images: [SITE.ogImage],
+    // Image comes from app/twitter-image.tsx.
   },
   robots: {
     index: true,
@@ -88,7 +86,7 @@ const personJsonLd = {
   jobTitle: SITE.role,
   url: SITE.url,
   description: SITE.description,
-  address: { "@type": "PostalAddress", addressLocality: "Nagpur", addressCountry: "IN" },
+  address: { "@type": "PostalAddress", addressLocality: "Pune", addressCountry: "IN" },
   sameAs: ["https://github.com/Sameer-Kadu", "https://www.linkedin.com/in/sameer-kadu/"],
 };
 
@@ -109,18 +107,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="font-body antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          <ExperienceModeProvider>
-            <CommandPaletteProvider>
-              <ExperienceShell>
-                <GridBackdrop />
-                <BootSequence />
-                <WorkspaceNav />
-                <main id="main">{children}</main>
-                <Footer />
-                <Cursor />
-              </ExperienceShell>
-            </CommandPaletteProvider>
-          </ExperienceModeProvider>
+          <CommandPaletteProvider>
+            <GridBackdrop />
+            <BootSequence />
+            <WorkspaceNav />
+            <main id="main">{children}</main>
+            <Footer />
+            <Cursor />
+          </CommandPaletteProvider>
         </ThemeProvider>
       </body>
     </html>

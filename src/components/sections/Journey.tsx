@@ -10,13 +10,13 @@ import Module from "@/components/system/Module";
 const ICONS: Record<TimelineEntry["type"], React.ComponentType<{ className?: string }>> = {
   experience: Briefcase,
   education: GraduationCap,
-  certification: Award,
+  award: Award,
 };
 
 const TYPE_LABEL: Record<TimelineEntry["type"], string> = {
   experience: "role",
   education: "education",
-  certification: "certification",
+  award: "award",
 };
 
 export default function Journey() {
@@ -26,7 +26,7 @@ export default function Journey() {
       index="04"
       code="journey"
       title="How the engineering got built."
-      lead="Formal grounding, then production ownership, then the cloud architecture that supports it — in the order it happened."
+      lead="Electrical engineering, then advanced computing, then production systems for health insurance — most recent first."
       sunken
     >
       <motion.ol

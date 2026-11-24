@@ -16,21 +16,23 @@ export type Achievement = {
  * already make elsewhere.
  */
 export const ACHIEVEMENTS: Achievement[] = [
-  ...JOURNEY.filter((entry) => entry.type === "certification").map((entry) => ({
-    id: "aws-saa",
-    label: entry.badge ?? "certification",
+  ...JOURNEY.filter((entry) => entry.type === "award").map((entry, i) => ({
+    id: `award-${i}`,
+    label: entry.badge ?? "award",
     title: entry.title,
     detail: entry.description,
     year: entry.duration,
   })),
 
-  ...JOURNEY.filter((entry) => entry.type === "education").map((entry) => ({
-    id: "pgdac",
-    label: entry.badge ?? "education",
-    title: entry.title,
-    detail: entry.highlights[entry.highlights.length - 1] ?? entry.description,
-    year: entry.duration,
-  })),
+  ...JOURNEY.filter((entry) => entry.type === "education" && entry.highlights.length > 0).map(
+    (entry, i) => ({
+      id: `education-${i}`,
+      label: entry.badge ?? "education",
+      title: entry.title,
+      detail: entry.highlights[entry.highlights.length - 1],
+      year: entry.duration,
+    })
+  ),
 
   ...PROJECTS.filter((p) => p.category === "hackathon").map((p) => ({
     id: `hackathon-${p.id}`,

@@ -381,12 +381,6 @@
    native cursor is untouched. Text entry always keeps its own caret.
    ============================================================ */
 
-/* Explorer View owns the viewport — the page underneath must not scroll. */
-html.explorer-active,
-html.explorer-active body {
-  overflow: hidden;
-}
-
 .has-custom-cursor,
 .has-custom-cursor * {
   cursor: none;

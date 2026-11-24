@@ -1,93 +1,103 @@
 import type { Project } from "./types";
 
 /**
- * Project case studies.
- *
- * Case-study sections restate information that already exists in this
- * repository (descriptions, impact bullets, tech stacks, links). Where the
- * repository holds no information — challenges encountered, measured outcomes —
- * the section is simply absent. The UI renders whatever exists and nothing more.
+ * Project case studies, from the Projects section of Sameer's resume, with the
+ * earlier architecture and case-study notes kept where they still hold.
+ * Where there is no information — measured outcomes, screenshots — the section
+ * or field is simply absent. The UI renders whatever exists and nothing more.
  */
 export const PROJECTS: Project[] = [
   {
     id: "go-bus",
     index: "01",
-    title: "Go Bus",
-    tagline: "Full-stack bus booking platform with multi-panel admin",
-    context: "CDAC PG-DAC capstone",
-    year: "2023",
+    title: "GoBus",
+    tagline: "Online bus ticket booking platform for travelers, operators and admins",
+    context: "Full stack · lead developer",
+    year: "2025",
     status: "live",
     description:
-      "End-to-end bus ticket booking system with separate dashboards for Admins, Operators, and Passengers. Built with role-based JWT authentication, real-time seat availability, route management, and a feedback system.",
-    techStack: ["React", "Spring Boot", "MySQL", "JWT Auth"],
+      "A React single-page app on a Spring Boot REST back end, with role-based flows for travelers, bus operators and admins: search, seat booking with email confirmation, cancellations, booking history, and operator and bus approvals.",
+    techStack: [
+      "Java 17",
+      "Spring Boot",
+      "Spring Security",
+      "JWT",
+      "JPA/Hibernate",
+      "MySQL",
+      "React",
+      "Tailwind CSS",
+      "Docker",
+      "Nginx",
+      "AWS",
+    ],
     image: "/images/go-bus.png",
-    githubLink: "https://github.com/Sameer-Kadu/Go_Bus.git",
+    githubLink: "https://github.com/Sameer-Kadu/Go_Bus",
     demoLink: "https://go-bus-oarm.vercel.app/",
-    category: "work",
+    category: "personal",
     featured: true,
     architecture: [
       {
         tier: "Client",
-        role: "Three distinct dashboards — Admin, Operator and Passenger — rendered from one React application, each gated by the role encoded in the session token.",
-        tech: ["React"],
+        role: "One React single-page app serving travelers, bus operators and admins, each gated by the role encoded in the session token.",
+        tech: ["React", "Tailwind CSS"],
+      },
+      {
+        tier: "Edge",
+        role: "Nginx reverse proxy in front of the Dockerised API on AWS EC2; the front end is also deployed on Vercel.",
+        tech: ["Nginx", "Docker", "AWS"],
       },
       {
         tier: "API",
-        role: "Spring Boot REST layer. Authentication issues JWTs; every downstream route authorises against the role claim before touching booking or route data.",
-        tech: ["Spring Boot", "JWT Auth"],
-      },
-      {
-        tier: "Domain",
-        role: "Booking, route management, seat availability and the customer feedback module — the rules that decide what each actor is allowed to see and change.",
-        tech: ["Spring Boot"],
+        role: "Spring Boot REST layer secured with Spring Security and JWT; every route authorises against the role claim before touching booking or route data.",
+        tech: ["Spring Boot", "Spring Security", "JWT"],
       },
       {
         tier: "Persistence",
-        role: "MySQL holds routes, seat inventory, bookings and feedback records.",
-        tech: ["MySQL"],
+        role: "JPA/Hibernate over MySQL on AWS RDS for routes, buses, seat inventory and bookings.",
+        tech: ["JPA/Hibernate", "MySQL"],
       },
     ],
     caseStudy: [
       {
         title: "Problem",
-        body: "Bus ticketing involves three actors with genuinely different needs against the same data: administrators managing the platform, operators managing their routes and fleets, and passengers booking seats. A single undifferentiated interface serves none of them well.",
+        body: "Bus ticketing involves three actors with genuinely different needs against the same data: admins managing the platform, operators managing their buses and routes, and travelers booking seats. A single undifferentiated interface serves none of them well.",
       },
       {
         title: "Approach",
-        body: "Build one system with three role-scoped surfaces rather than three systems. Authentication decides which surface you get, and authorisation is enforced on the API rather than hidden in the UI.",
+        body: "Build one system with role-scoped flows rather than three systems. Authentication decides which flow you get, and authorisation is enforced on the API rather than hidden in the UI.",
         points: [
-          "Multi-role authentication with JWT — Admin, Operator, Passenger panels",
-          "Real-time seat availability and dynamic route management",
-          "Customer feedback module improving operator accountability",
+          "Travelers: search, seat booking with email confirmation, cancellations and booking history",
+          "Operators: manage buses and routes, subject to admin approval",
+          "Admins: approve operators and buses",
         ],
       },
       {
         title: "Engineering decisions",
         points: [
-          "Role-based JWT authentication so a single token carries both identity and permission scope",
-          "Separate dashboards per actor instead of conditionally hiding controls in a shared view",
-          "A feedback loop attached to operators, making service quality visible rather than anecdotal",
+          "Spring Security with JWT so a single token carries both identity and permission scope",
+          "Docker and an Nginx reverse proxy on AWS EC2/RDS for a production-shaped deployment",
+          "Selenium end-to-end tests and JUnit tests running in a Jenkins and GitHub Actions pipeline",
         ],
       },
       {
         title: "Outcome",
-        body: "Delivered as the capstone for the CDAC PG-DAC programme. Source is public and a live deployment is available.",
+        body: "Built as lead developer. Source is public and a live deployment is available.",
       },
     ],
   },
   {
     id: "cultural-tourism-explorer",
     index: "02",
-    title: "Cultural Tourism Explorer",
-    tagline: "Hackathon winner — data-driven India tourism platform",
-    context: "Snowflake × YourStory Hero Hackathon",
-    year: "2023",
+    title: "Art, Culture and Tourism Explorer",
+    tagline: "Snowflake × YourStory Hero Challenge 2025 — $2,500 prize winner",
+    context: "Snowflake hackathon · lead developer",
+    year: "2025",
     status: "live",
     description:
-      "Built in 48 hours for the Snowflake × YourStory Hero Hackathon. A data storytelling platform bridging art, culture, and tourism across India using interactive visualizations powered by Snowflake's data cloud.",
-    techStack: ["Snowflake", "Streamlit", "Python", "Pandas"],
+      "A data-driven exploration platform bridging art, culture and tourism across India, with interactive visualisations built on Snowflake, SQL, Python and Streamlit. Won a $2,500 prize for technical innovation.",
+    techStack: ["Snowflake", "SQL", "Python", "Streamlit", "Pandas"],
     image: "/images/tourism-hackathon.png",
-    githubLink: "https://github.com/Sameer-Kadu/snowflake-hero-challenge.git",
+    githubLink: "https://github.com/Sameer-Kadu/snowflake-hero-challenge",
     demoLink: "https://wanderwiseindia.streamlit.app/",
     category: "hackathon",
     featured: true,
@@ -104,8 +114,8 @@ export const PROJECTS: Project[] = [
       },
       {
         tier: "Data cloud",
-        role: "Snowflake as the backing data platform for the datasets behind the visualisations.",
-        tech: ["Snowflake"],
+        role: "Snowflake, queried with SQL, as the backing data platform for the datasets behind the visualisations.",
+        tech: ["Snowflake", "SQL"],
       },
     ],
     caseStudy: [
@@ -115,23 +125,73 @@ export const PROJECTS: Project[] = [
       },
       {
         title: "Approach",
-        body: "Treat it as data storytelling rather than a dashboard: interactive visualisations that connect cultural context to destinations, assembled end to end inside a 48-hour hackathon window.",
+        body: "Treat it as data storytelling rather than a dashboard: interactive visualisations that connect cultural context to destinations.",
         points: [
-          "Built end-to-end in 48 hours for a national-level hackathon",
-          "Interactive visualizations across 28+ Indian cultural destinations",
-          "Snowflake data cloud integration for real-time insights",
+          "Interactive visualizations across Indian cultural destinations",
+          "Snowflake data cloud integration, queried with SQL",
         ],
       },
       {
         title: "Engineering decisions",
         points: [
-          "Streamlit for the interface — the shortest path from a Pandas dataframe to an interactive view under time pressure",
+          "Streamlit for the interface — the shortest path from a Pandas dataframe to an interactive view under hackathon time pressure",
           "Snowflake as the data layer so the visualisations query a real cloud warehouse rather than bundled fixtures",
         ],
       },
       {
         title: "Outcome",
-        body: "Recorded in this portfolio as a hackathon win. Source is public and the application is deployed on Streamlit Community Cloud.",
+        body: "Won a $2,500 prize for technical innovation in the Snowflake × YourStory Hero Challenge 2025. Source is public and the application is deployed on Streamlit Community Cloud.",
+      },
+    ],
+  },
+  {
+    id: "build-your-resume",
+    index: "03",
+    title: "Build Your Resume",
+    tagline: "Resume builder with live preview, PDF export and ATS scoring",
+    context: "Web app · sole developer",
+    year: "2025",
+    // No public deployment is listed, so no "deployed" badge.
+    status: "archived",
+    description:
+      "A resume builder written in TypeScript with Next.js and React: step-by-step forms, a live preview, PDF export and an ATS scoring utility. Google Sign-In and the Google Drive REST API keep each user's data in their own Drive, with no back end.",
+    techStack: ["TypeScript", "Next.js", "React", "Google Sign-In", "Google Drive API"],
+    githubLink: "https://github.com/Sameer-Kadu/Build-Your-Resume",
+    category: "personal",
+    featured: true,
+    architecture: [
+      {
+        tier: "Client",
+        role: "Next.js and React app with step-by-step forms, a live preview, PDF export and an ATS scoring utility.",
+        tech: ["Next.js", "React", "TypeScript"],
+      },
+      {
+        tier: "Identity",
+        role: "Google Sign-In authenticates the user and authorises access to their own Google Drive.",
+        tech: ["Google Sign-In"],
+      },
+      {
+        tier: "Storage",
+        role: "Each user's resume data is stored in their own Google Drive through the Drive REST API — there is no application back end.",
+        tech: ["Google Drive API"],
+      },
+    ],
+    caseStudy: [
+      {
+        title: "Approach",
+        body: "A guided, step-by-step builder with a live preview, so the resume is always visible while it is being written.",
+        points: [
+          "Step-by-step forms with live preview",
+          "PDF export",
+          "ATS scoring utility",
+        ],
+      },
+      {
+        title: "Engineering decisions",
+        points: [
+          "No back end: Google Sign-In plus the Google Drive REST API store each user's data in their own Drive",
+          "TypeScript throughout, on Next.js and React",
+        ],
       },
     ],
   },

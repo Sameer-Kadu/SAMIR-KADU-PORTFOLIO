@@ -10,6 +10,12 @@ export type Tech = {
   name: string;
   /** Path under /public/icons, when an icon exists for this technology. */
   icon?: string;
+  /**
+   * How the icon needs help on the dark theme: `mono` icons are plain black
+   * artwork (inverted in dark mode); `dark` icons are coloured but contain
+   * dark parts that would vanish, so they get a small light backing instead.
+   */
+  tone?: "mono" | "dark";
 };
 
 export type DomainId = "frontend" | "backend" | "data" | "quality" | "cloud";
@@ -19,7 +25,7 @@ export type Domain = {
   /** Two-letter code used in the network diagram and technical rails. */
   code: string;
   label: string;
-  /** One line describing what this domain means in practice for Samir. */
+  /** One line describing what this domain means in practice for Sameer. */
   summary: string;
   tech: Tech[];
   /** Other domains this one connects to in the engineering network. */
@@ -52,7 +58,8 @@ export type Project = {
   status: "live" | "archived";
   description: string;
   techStack: string[];
-  image: string;
+  /** Screenshot under /public/images. Omitted when none exists yet. */
+  image?: string;
   githubLink?: string;
   demoLink?: string;
   category: "work" | "hackathon" | "personal";
@@ -64,7 +71,7 @@ export type Project = {
 };
 
 export type TimelineEntry = {
-  type: "experience" | "education" | "certification";
+  type: "experience" | "education" | "award";
   title: string;
   org: string;
   duration: string;

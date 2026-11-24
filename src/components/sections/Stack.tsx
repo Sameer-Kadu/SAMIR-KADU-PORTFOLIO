@@ -96,7 +96,13 @@ export default function Stack() {
                         alt=""
                         width={14}
                         height={14}
-                        className="h-3.5 w-3.5 object-contain"
+                        className={`h-3.5 w-3.5 object-contain ${
+                          tech.tone === "mono"
+                            ? "dark:invert"
+                            : tech.tone === "dark"
+                              ? "dark:rounded-[3px] dark:bg-white dark:p-px"
+                              : ""
+                        }`}
                       />
                     )}
                     {tech.name}
