@@ -3,10 +3,12 @@
 import { Command, Github, Linkedin, Mail } from "lucide-react";
 import { MODULES, SITE, SOCIAL } from "@/content/site";
 import { scrollToModule } from "@/lib/scroll";
+import { useModifierKey } from "@/lib/hooks/useModifierKey";
 import { useCommandPalette } from "./CommandPaletteProvider";
 
 export default function Footer() {
   const palette = useCommandPalette();
+  const modKey = useModifierKey();
   const year = new Date().getFullYear();
 
   return (
@@ -28,7 +30,7 @@ export default function Footer() {
             <div className="mt-6 flex items-center gap-2">
               <a
                 href={`mailto:${SOCIAL.email}`}
-                aria-label="Email Samir Kadu"
+                aria-label="Email Sameer Kadu"
                 className="tap grid h-9 w-9 place-items-center rounded-lg border border-line text-ink-3 transition-colors duration-fast hover:border-line-strong hover:text-ink"
               >
                 <Mail className="h-4 w-4" />
@@ -38,7 +40,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor="external"
-                aria-label="Samir Kadu on LinkedIn"
+                aria-label="Sameer Kadu on LinkedIn"
                 className="tap grid h-9 w-9 place-items-center rounded-lg border border-line text-ink-3 transition-colors duration-fast hover:border-line-strong hover:text-ink"
               >
                 <Linkedin className="h-4 w-4" />
@@ -48,7 +50,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor="external"
-                aria-label="Samir Kadu on GitHub"
+                aria-label="Sameer Kadu on GitHub"
                 className="tap grid h-9 w-9 place-items-center rounded-lg border border-line text-ink-3 transition-colors duration-fast hover:border-line-strong hover:text-ink"
               >
                 <Github className="h-4 w-4" />
@@ -87,9 +89,9 @@ export default function Footer() {
             onClick={palette.toggle}
             className="hidden items-center gap-2 self-start text-[0.75rem] text-ink-3 transition-colors duration-fast hover:text-ink-2 md:inline-flex"
           >
-            <Command className="h-3.5 w-3.5" />
+            {modKey === "⌘" && <Command className="h-3.5 w-3.5" />}
             Press
-            <kbd className="kbd">⌘</kbd>
+            <kbd className="kbd">{modKey}</kbd>
             <kbd className="kbd">K</kbd>
             to navigate
           </button>

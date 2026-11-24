@@ -1,54 +1,77 @@
 import type { TimelineEntry } from "./types";
 
 /**
- * The engineering journey. Content is preserved verbatim from the original
- * repository data; `tech` links each chapter back to the Stack module.
+ * The engineering journey, from Sameer's resume. `tech` links each chapter back
+ * to the Stack module.
  */
 export const JOURNEY: TimelineEntry[] = [
   {
     type: "experience",
-    title: "Software Engineer",
-    org: "Bajaj Finserv Health",
-    duration: "Jan 2023 – Present",
+    title: "Associate Software Development Engineer",
+    org: "Bajaj Finserv Health Limited, Pune",
+    duration: "Mar 2025 – Present",
     badge: "Current",
     description:
-      "Engineering critical features for one of India's leading digital health platforms. Own full-cycle delivery — requirements to production — across frontend, backend, and QA automation.",
+      "Back-end and full-stack engineering for health insurance claims and pre-authorization systems, in the healthcare and health insurance domain.",
     highlights: [
-      "Built patient-facing features for a platform serving millions of users",
-      "Designed automated test suites with Selenium & Playwright, reducing regression testing time by 60%+",
-      "Contributed to microservices architecture improvements for better system scalability",
-      "Collaborated cross-functionally with product, design, and QA teams in Agile sprints",
+      "Built back-end logic in Java and Spring Boot and Kafka event workflows for claims and pre-authorization on the Universal Provider Portal (UPP) and the Vidal Health Care portal",
+      "Automated claims and pre-authorization workflows for insurance partners including TATA AIG and Wipro",
+      "Built processing workflows for the Kerala MEDISEP project, supporting large-scale state healthcare operations",
+      "Developed Java and Oracle validation for REST APIs and Kafka event flows, catching data inconsistencies before release",
+      "Debugged and resolved production issues across microservices as part of production monitoring (Prod-Mon) support",
+      "Wrote JUnit tests and integrated Selenium and Playwright UI/API suites into Jenkins and GitHub Actions CI/CD pipelines",
+      "Received the Sharp Shark Award for partner integrations, critical escalations and go-lives of Onsurity, ADME and GoCover",
+      "Al Koot Insurance, Qatar (service engagement): worked on a motor insurance platform built on Volaris One — product setup, underwriting, quotation, policy issuance, endorsements, claims and finance — analysing business rules end to end with the Java/Spring developers in an AI-assisted (Claude) delivery workflow",
     ],
-    tech: ["React", "Selenium", "Playwright", "Jira"],
+    tech: [
+      "Java",
+      "Spring Boot",
+      "Kafka",
+      "Oracle",
+      "PL/SQL",
+      "PostgreSQL",
+      "React",
+      "JUnit",
+      "Jenkins",
+      "GitHub Actions",
+      "AWS",
+      "Azure",
+    ],
   },
   {
-    type: "certification",
-    title: "AWS Certified Solutions Architect – Associate",
-    org: "Amazon Web Services",
-    duration: "May 2023",
-    badge: "SAA-C03",
+    type: "award",
+    title: "Winner, Snowflake × YourStory Hero Challenge",
+    org: "Snowflake × YourStory",
+    duration: "2025",
+    badge: "$2,500 prize",
     description:
-      "Demonstrated expertise in designing distributed, highly available, and fault-tolerant systems on AWS.",
+      "Won a $2,500 prize for technical innovation as lead developer of the Art, Culture and Tourism Explorer.",
     highlights: [
-      "Cloud architecture: EC2, S3, RDS, Lambda, VPC, IAM",
-      "High availability and disaster recovery design patterns",
-      "Cost optimization and AWS Well-Architected Framework",
+      "Data-driven exploration platform built on Snowflake, SQL, Python and Streamlit",
     ],
-    tech: ["AWS"],
+    tech: ["Snowflake", "SQL", "Python"],
   },
   {
     type: "education",
-    title: "Post Graduate Diploma in Advanced Computing",
-    org: "CDAC (Centre for Development of Advanced Computing)",
-    duration: "Aug 2022 – Jan 2023",
-    badge: "PG-DAC",
+    title: "PG-DAC, Post Graduate Diploma in Advanced Computing",
+    org: "SunBeam Institute of Information Technology, Pune (CDAC)",
+    duration: "2024 – 2025",
+    badge: "74.13%",
     description:
-      "Intensive 6-month program covering the full spectrum of software engineering — from data structures and algorithms to full-stack development, databases, and system design.",
+      "CDAC's post-graduate programme in advanced computing, covering full-stack development, databases and core computer science.",
     highlights: [
-      "Full-stack web development: Java, React, Spring Boot, MySQL",
-      "Core CS fundamentals: DSA, OS, DBMS, Computer Networks",
-      "Graduated with a project-focused capstone (Go Bus platform)",
+      "Lead developer of GoBus, a full-stack bus ticket booking platform",
+      "Gold medal — top of the Database Technology module",
     ],
-    tech: ["Java", "React", "SQL"],
+    tech: ["Java", "Spring Boot", "React", "MySQL"],
+  },
+  {
+    type: "education",
+    title: "B.Tech in Electrical Engineering",
+    org: "Government College of Engineering, Nagpur",
+    duration: "2020 – 2024",
+    badge: "82.3%",
+    description: "Undergraduate degree in Electrical Engineering.",
+    highlights: [],
   },
 ];

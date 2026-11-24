@@ -13,7 +13,7 @@ import ArchitectureDiagram from "./ArchitectureDiagram";
 /**
  * Immersive case-study view.
  *
- * Opens over the explorer as a modal dialog: focus is trapped, Escape closes,
+ * Opens over the work list as a modal dialog: focus is trapped, Escape closes,
  * background scroll is locked, and focus returns to the trigger on close.
  */
 export default function CaseStudy({
@@ -199,16 +199,18 @@ export default function CaseStudy({
               {/* Screenshot */}
               {/* contain, not cover: these are UI screenshots — the whole frame
                   is the information, so nothing gets cropped away. */}
-              <div className="relative mb-9 aspect-[1.93/1] overflow-hidden rounded-xl border border-line bg-sunken">
-                <Image
-                  src={project.image}
-                  alt={`${project.title} interface`}
-                  fill
-                  sizes="(max-width: 768px) 92vw, 720px"
-                  className="object-contain"
-                  priority
-                />
-              </div>
+              {project.image && (
+                <div className="relative mb-9 aspect-[1.93/1] overflow-hidden rounded-xl border border-line bg-sunken">
+                  <Image
+                    src={project.image}
+                    alt={`${project.title} interface`}
+                    fill
+                    sizes="(max-width: 768px) 92vw, 720px"
+                    className="object-contain"
+                    priority
+                  />
+                </div>
+              )}
 
               <p className="mb-10 text-[0.9375rem] leading-[1.75] text-ink-2">
                 {project.description}

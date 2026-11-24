@@ -1,82 +1,93 @@
 import type { Domain } from "./types";
 
 /**
- * Engineering domains.
- *
- * Every technology listed here appears in the original skills data. Domains
- * exist only where there is real depth behind them — there is deliberately no
- * "AI/ML" or "Architecture" domain, because the repository records those as
- * interests and a certification rather than a working skill set.
+ * Engineering domains, from the Technical Skills section of Sameer's resume.
+ * Technologies without an SVG in /public/icons render as plain labels.
  */
 export const DOMAINS: Domain[] = [
   {
     id: "frontend",
     code: "FE",
     label: "Frontend",
-    summary: "Interfaces built with a component system, typed end to end.",
+    summary: "Typed, component-driven interfaces in React, Next.js and Angular.",
     links: ["backend", "quality"],
     tech: [
       { name: "React", icon: "/icons/react.svg" },
-      { name: "Next.js", icon: "/icons/nextjs.svg" },
+      { name: "Next.js", icon: "/icons/nextjs.svg", tone: "mono" },
+      { name: "Angular" },
       { name: "TypeScript", icon: "/icons/typescript.svg" },
       { name: "JavaScript", icon: "/icons/javascript.svg" },
       { name: "Tailwind CSS", icon: "/icons/tailwind.svg" },
       { name: "HTML5", icon: "/icons/html5.svg" },
       { name: "CSS3", icon: "/icons/css3.svg" },
-      { name: "Bootstrap", icon: "/icons/bootstrap.svg" },
     ],
   },
   {
     id: "backend",
     code: "BE",
     label: "Backend",
-    summary: "Services and APIs across the Node, Python and Java ecosystems.",
+    summary: "Java and Spring Boot microservices with Kafka event workflows.",
     links: ["frontend", "data", "cloud"],
     tech: [
-      { name: "Node.js", icon: "/icons/nodejs.svg" },
-      { name: "Express.js", icon: "/icons/express.svg" },
-      { name: "Python", icon: "/icons/python.svg" },
-      { name: "Django", icon: "/icons/django.svg" },
-      { name: "Flask", icon: "/icons/flask.svg" },
       { name: "Java", icon: "/icons/java.svg" },
+      { name: "Spring Boot" },
+      { name: "Spring MVC" },
+      { name: "Spring Security (JWT)" },
+      { name: "JPA / Hibernate" },
+      { name: "Kafka" },
+      { name: "REST APIs" },
+      { name: "Microservices" },
+      { name: "Node.js", icon: "/icons/nodejs.svg" },
+      { name: "Express.js", icon: "/icons/express.svg", tone: "mono" },
+      { name: "Python", icon: "/icons/python.svg" },
+      { name: "C++" },
     ],
   },
   {
     id: "data",
     code: "DB",
     label: "Data",
-    summary: "Relational and document persistence behind the services.",
+    summary: "Relational databases and the Snowflake data cloud.",
     links: ["backend", "cloud"],
     tech: [
+      { name: "Oracle" },
+      { name: "MySQL" },
+      { name: "PostgreSQL" },
+      { name: "Snowflake" },
       { name: "SQL", icon: "/icons/sql.svg" },
-      { name: "MongoDB", icon: "/icons/mongodb.svg" },
+      { name: "PL/SQL" },
     ],
   },
   {
     id: "quality",
     code: "QA",
     label: "Quality",
-    summary: "Automated regression coverage and the tooling around it.",
-    links: ["frontend", "cloud"],
+    summary: "Unit, UI and API tests wired into CI, plus production debugging.",
+    links: ["frontend", "backend", "cloud"],
     tech: [
+      { name: "JUnit" },
       { name: "Selenium", icon: "/icons/selenium.svg" },
       { name: "Playwright", icon: "/icons/playwright.svg" },
-      { name: "Cypress", icon: "/icons/cypress.svg" },
-      { name: "TestRail", icon: "/icons/testrail.svg" },
-      { name: "Jira", icon: "/icons/jira.svg" },
+      { name: "Postman" },
+      { name: "Swagger" },
     ],
   },
   {
     id: "cloud",
     code: "OPS",
     label: "Cloud & DevOps",
-    summary: "Packaging, pipelines and AWS infrastructure.",
+    summary: "Containers, reverse proxies, CI/CD pipelines, AWS and Azure.",
     links: ["backend", "data", "quality"],
     tech: [
-      { name: "AWS", icon: "/icons/aws.svg" },
       { name: "Docker", icon: "/icons/docker.svg" },
-      { name: "Kubernetes", icon: "/icons/kubernetes.svg" },
+      { name: "Docker Compose" },
+      { name: "Nginx" },
       { name: "Jenkins", icon: "/icons/jenkins.svg" },
+      { name: "GitHub Actions" },
+      { name: "Linux" },
+      { name: "AWS EC2 / RDS", icon: "/icons/aws.svg", tone: "dark" },
+      { name: "Azure" },
+      { name: "Vercel" },
       { name: "Git", icon: "/icons/git.svg" },
     ],
   },
@@ -89,9 +100,9 @@ export const DOMAINS: Domain[] = [
  */
 export const STACK_FLOW = [
   { stage: "Client", tech: ["React", "Next.js", "TypeScript"], domain: "frontend" as const },
-  { stage: "API", tech: ["Node.js", "Express.js"], domain: "backend" as const },
-  { stage: "Services", tech: ["Python", "Java"], domain: "backend" as const },
-  { stage: "Persistence", tech: ["SQL", "MongoDB"], domain: "data" as const },
-  { stage: "Verification", tech: ["Playwright", "Selenium"], domain: "quality" as const },
+  { stage: "API", tech: ["Spring Boot", "Spring Security (JWT)"], domain: "backend" as const },
+  { stage: "Events", tech: ["Kafka", "Microservices"], domain: "backend" as const },
+  { stage: "Persistence", tech: ["Oracle", "MySQL", "PostgreSQL"], domain: "data" as const },
+  { stage: "Verification", tech: ["JUnit", "Playwright", "Selenium"], domain: "quality" as const },
   { stage: "Delivery", tech: ["Docker", "Jenkins", "AWS"], domain: "cloud" as const },
 ];

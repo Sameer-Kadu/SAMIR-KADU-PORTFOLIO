@@ -50,13 +50,13 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     title: SITE.title,
     description: SITE.shortDescription,
-    images: [{ url: SITE.ogImage, width: 1200, height: 630, alt: SITE.title }],
+    // Image comes from app/opengraph-image.tsx (generated, always in sync).
   },
   twitter: {
     card: "summary_large_image",
     title: SITE.title,
     description: SITE.shortDescription,
-    images: [SITE.ogImage],
+    // Image comes from app/twitter-image.tsx.
   },
   robots: {
     index: true,
@@ -86,7 +86,7 @@ const personJsonLd = {
   jobTitle: SITE.role,
   url: SITE.url,
   description: SITE.description,
-  address: { "@type": "PostalAddress", addressLocality: "Nagpur", addressCountry: "IN" },
+  address: { "@type": "PostalAddress", addressLocality: "Pune", addressCountry: "IN" },
   sameAs: ["https://github.com/Sameer-Kadu", "https://www.linkedin.com/in/sameer-kadu/"],
 };
 

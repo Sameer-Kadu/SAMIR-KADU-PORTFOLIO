@@ -1,34 +1,34 @@
 import type { NavModule } from "./types";
 
 export const SITE = {
-  name: "Samir Kadu",
-  role: "Full Stack Engineer",
-  url: "https://www.samirkadu.com",
-  title: "Samir Kadu — Full Stack Engineer",
+  name: "Sameer Kadu",
+  role: "Full Stack Software Engineer",
+  url: "https://samir-kadu-portfolio.vercel.app",
+  title: "Sameer Kadu — Full Stack Software Engineer",
   description:
-    "Full Stack Engineer & QA Automation specialist with 3+ years building scalable health-tech platforms at Bajaj Finserv Health. React, Next.js, TypeScript, Node.js, AWS.",
+    "Software engineer at Bajaj Finserv Health building Java, Spring Boot and Kafka microservices for health insurance claims and pre-authorization. Full stack with React and TypeScript; ships with Docker, Nginx and AWS.",
   shortDescription:
-    "3+ years building scalable health-tech platforms. React · Next.js · TypeScript · AWS.",
+    "Java · Spring Boot · Kafka · Microservices · React. Building health-insurance claims systems at Bajaj Finserv Health.",
   keywords: [
-    "Samir Kadu",
+    "Sameer Kadu",
     "Full Stack Engineer",
     "Software Engineer",
+    "Java",
+    "Spring Boot",
+    "Kafka",
+    "Microservices",
     "React",
-    "Next.js",
     "TypeScript",
-    "Node.js",
     "AWS",
-    "QA Automation",
     "Bajaj Finserv Health",
     "portfolio",
   ],
-  ogImage: "/og-image.jpg",
-  resume: "/Samir_Kadu_Resume.pdf",
-  location: "Nagpur, Maharashtra, India",
+  resume: "/Sameer_Kadu_Resume.pdf",
+  location: "Pune, Maharashtra, India",
 } as const;
 
 export const SOCIAL = {
-  email: "samirkadu8@gmail.com",
+  email: "sameervkadu@gmail.com",
   linkedin: "https://www.linkedin.com/in/sameer-kadu/",
   github: "https://github.com/Sameer-Kadu",
   githubHandle: "Sameer-Kadu",
